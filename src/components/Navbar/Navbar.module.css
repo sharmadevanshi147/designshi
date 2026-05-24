@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════
+   Navbar — PF Design, Frame 25/26
+   bg #FFF3FA · h 75px · centered
+   ══════════════════════════════════ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+
+  height: var(--navbar-height);         /* 75px */
+  padding: var(--navbar-py) var(--navbar-px); /* 10px 32px */
+
+  background-color: var(--color-nav-bg); /* #FFF3FA */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    box-shadow          var(--dur-base) var(--ease-in-out),
+    backdrop-filter     var(--dur-base) var(--ease-in-out),
+    background-color    var(--dur-base) var(--ease-in-out);
+}
+
+/* Scroll-aware: faint separator matching notebook lines */
+.scrolled {
+  background-color: var(--color-nav-bg-blur);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-nav);
+}
+
+/* ── Inner container ── */
+.navInner {
+  width: 100%;
+  max-width: 1728px;
+}
+
+/* ── Link list — centered row, 48px gap ── */
+.linkList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nav-gap);                  /* 48px */
+}
+
+/* ── Anchor ── */
+.navLink {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 2px 0;
+  text-decoration: none;
+}
+
+/* ── Label — Google Sans Flex Regular 18px #101010 ── */
+.linkText {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;                  /* 18px */
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-ink);
+  letter-spacing: 0;
+  white-space: nowrap;
+  user-select: none;
+  transition: opacity var(--dur-fast) var(--ease-in-out);
+}
+
+.navLink:hover .linkText {
+  opacity: 0.75;
+}
+
+/* ── Animated underline ── */
+.underline {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  margin-top: 3px;
+  background-color: var(--color-ink);
+  border-radius: 2px;
+  transform-origin: left;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .navbar { padding: var(--navbar-py) var(--space-6); }
+  .linkList { gap: var(--space-8); }
+  .linkText { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .linkList { gap: var(--space-5); }
+  .linkText { font-size: 0.875rem; }
+}

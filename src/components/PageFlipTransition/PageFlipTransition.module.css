@@ -1,0 +1,47 @@
+/* Full-viewport book stage — both pages live here */
+.stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+/* ── About page: always behind, scrolls its own content ── */
+.behindPage {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1;
+
+  /* Same ruled-notebook background as the body */
+  background-color: var(--color-bg);
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(var(--line-gap) - 0.5px),
+    var(--color-line) 0.5px
+  );
+  background-size: 100% var(--line-gap);
+  background-attachment: local;
+}
+
+/* ── Hero page: flips right-to-left (left edge is pivot) ── */
+.heroPage {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 2;
+  will-change: transform;
+
+  /* Ruled-notebook background on the page itself during the 3-D flip */
+  background-color: var(--color-bg);
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(var(--line-gap) - 0.5px),
+    var(--color-line) 0.5px
+  );
+  background-size: 100% var(--line-gap);
+}

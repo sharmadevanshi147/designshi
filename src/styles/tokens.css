@@ -1,0 +1,77 @@
+/* ─────────────────────────────────────────────
+   PORTFOLIO — Design Tokens
+   Source of truth for colors, type, spacing
+───────────────────────────────────────────── */
+
+:root {
+  /* ── Colors ── */
+  --color-bg:           #ffffff;
+  --color-ink:          #101010;
+  --color-ink-70:       rgba(16, 16, 16, 0.70);
+  --color-ink-40:       rgba(16, 16, 16, 0.40);
+  --color-ink-12:       rgba(16, 16, 16, 0.12);
+
+  /* Notebook ruled line */
+  --color-line:         #D4C3AF;
+  --line-gap:           48px;
+
+  /* Navbar surface */
+  --color-nav-bg:       #FFF3FA;
+  --color-nav-bg-blur:  rgba(255, 243, 250, 0.90);
+
+  /* Accent */
+  --color-pink:         #EA5DB4;
+
+  /* ── Typography ── */
+  --font-sans:    'Google Sans Flex', 'Google Sans', system-ui, -apple-system, sans-serif;
+  --font-dm:      'DM Sans', system-ui, sans-serif;
+  --font-fredoka: 'Fredoka One', cursive;
+  --font-darker:  'Darker Grotesque', system-ui, sans-serif;
+
+  /* Section backgrounds */
+  --color-about-bg: #FFFAEE;
+
+  /* Hero fluid sizes — scale 375px → 1728px */
+  --hero-hi:   clamp(3rem,  11.6vw, 12.5rem);   /* 200px @ 1728 */
+  --hero-name: clamp(3.6rem, 13.9vw, 15rem);    /* 240px @ 1728 */
+  --hero-sub:  clamp(1.1rem, 2.55vw,  2.75rem); /*  44px @ 1728 */
+
+  /* About section fluid sizes */
+  --about-bio: clamp(1.25rem, 2.55vw, 2.75rem); /*  44px @ 1728 */
+
+  /* ── Spacing ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ── Navbar ── */
+  --navbar-height: 75px;
+  --navbar-px:     32px;
+  --navbar-py:     10px;
+  --nav-gap:       48px;
+
+  /* ── Border radius ── */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+
+  /* ── Shadows ── */
+  --shadow-nav: 0 1px 0 var(--color-line);
+
+  /* ── Transitions ── */
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:    140ms;
+  --dur-base:    280ms;
+  --dur-slow:    500ms;
+}

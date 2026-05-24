@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════════
+   Hero — PF Design, Component 1
+   1728 × 777 · padding 64 · center-stacked
+   ═══════════════════════════════════════════ */
+
+.hero {
+  width: 100%;
+  min-height: 777px;
+  background: transparent; /* notebook lines bleed through from body */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 64px Figma padding + navbar height so text clears the bar */
+  padding: calc(var(--navbar-height) + 64px) 64px 64px;
+  box-sizing: border-box;
+}
+
+/* ── Vertical stack ── */
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ─────────────────────────────────────────────
+   "Hi, I'm"
+   DM Sans · Regular · 200px · #151516
+───────────────────────────────────────────── */
+.greetingWrap {
+  /* Figma inner gap = −52px → overlap "Devanshi" upward */
+  margin-bottom: -52px;
+  position: relative;
+  z-index: 1;
+}
+
+.greeting {
+  font-family: var(--font-dm);
+  font-size: var(--hero-hi);   /* clamp(3rem, 11.6vw, 12.5rem) */
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #151516;
+  text-align: center;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+   "Devanshi"
+   Fredoka One · 240px · #EA5DB4 · ls −1%
+───────────────────────────────────────────── */
+.nameWrap {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 8px;
+}
+
+.name {
+  display: block;
+  font-family: var(--font-fredoka);
+  font-size: var(--hero-name); /* clamp(3.6rem, 13.9vw, 15rem) */
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: #EA5DB4;
+  text-align: center;
+  text-shadow: 0 2px 32px rgba(234, 93, 180, 0.18);
+  perspective: 600px;
+}
+
+/* ─────────────────────────────────────────────
+   "UX Designer & Developer"
+   Darker Grotesque · SemiBold · 44px · #151516
+───────────────────────────────────────────── */
+.subtitle {
+  font-family: var(--font-darker);
+  font-size: var(--hero-sub);  /* clamp(1.1rem, 2.55vw, 2.75rem) */
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #151516;
+  text-align: center;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* ─────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero {
+    padding: calc(var(--navbar-height) + 48px) 40px 48px;
+    min-height: 600px;
+  }
+  .greetingWrap { margin-bottom: -36px; }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: calc(var(--navbar-height) + 32px) 24px 32px;
+    min-height: 480px;
+  }
+  .greetingWrap { margin-bottom: -24px; }
+}

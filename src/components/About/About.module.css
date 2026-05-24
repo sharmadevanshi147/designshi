@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════
+   About — ruled notebook bg (from behindPage)
+   Card sits centred on the page; tape straddles
+   the card's top edge like in the Figma design.
+   ═══════════════════════════════════════════ */
+
+.about {
+  width: 100%;
+  min-height: 100vh;
+  background: transparent; /* ruled bg comes from behindPage */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Clear the fixed navbar */
+  padding: calc(var(--navbar-height) + 48px) 60px 60px;
+  box-sizing: border-box;
+}
+
+/* ── Outer wrapper so tape can overlap the card's top edge ── */
+.cardWrap {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Tape sits centred above the card, half-overlapping it ── */
+.tapeHolder {
+  position: relative;
+  z-index: 3;
+  /* Negative margin pushes the card up so the tape overlaps */
+  margin-bottom: -22px;
+  pointer-events: none;
+}
+
+/* ── Cream card — matches Figma #FFFAEE ── */
+.card {
+  width: 100%;
+  background-color: #FFFAEE;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+
+  padding: 72px 80px 64px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─────────────────────────────────────────────
+   Bio
+───────────────────────────────────────────── */
+.bio {
+  font-family: var(--font-darker);
+  font-size: var(--about-bio); /* clamp(1.25rem, 2.55vw, 2.75rem) */
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #151516;
+  text-align: center;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+   CTA Button
+───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-pink);
+  font-family: var(--font-dm);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  outline-offset: 3px;
+  transition: background-color var(--dur-base) var(--ease-in-out);
+}
+
+.btn:hover        { background-color: #d44fa3; }
+.btn:focus-visible { outline: 2px solid var(--color-pink); }
+
+.btnIcon { flex-shrink: 0; display: block; }
+
+/* ─────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .about { padding: calc(var(--navbar-height) + 40px) 40px 40px; }
+  .card  { padding: 60px 48px 52px; }
+}
+
+@media (max-width: 640px) {
+  .about { padding: calc(var(--navbar-height) + 32px) 20px 32px; }
+  .card  { padding: 52px 28px 44px; border-radius: 14px; }
+  .btn   { font-size: 1rem; padding: 14px 28px; }
+}
