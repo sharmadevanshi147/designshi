@@ -1,6 +1,9 @@
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, createContext } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import styles from './PageFlipTransition.module.css'
+
+/** Provides the behindPage scroll container ref to deep children (e.g. Projects) */
+export const ScrollContainerCtx = createContext(null)
 
 const FLIP_DURATION = 0.72
 
@@ -112,10 +115,12 @@ export default function PageFlipTransition({ hero, about }) {
 
   return (
     <div className={styles.stage}>
-      {/* About — lives behind the hero, scrollable within the viewport */}
-      <div className={styles.behindPage} ref={behindRef}>
-        {about}
-      </div>
+      {/* About + Projects — live behind the hero, scrollable within the viewport */}
+      <ScrollContainerCtx.Provider value={behindRef}>
+        <div className={styles.behindPage} ref={behindRef}>
+          {about}
+        </div>
+      </ScrollContainerCtx.Provider>
 
       {/* Hero — flips forward (right-to-left) and back (left-to-right) */}
       <motion.div

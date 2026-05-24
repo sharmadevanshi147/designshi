@@ -1,6 +1,7 @@
-import Navbar            from './components/Navbar/Navbar'
-import Hero              from './components/Hero/Hero'
-import About             from './components/About/About'
+import Navbar             from './components/Navbar/Navbar'
+import Hero               from './components/Hero/Hero'
+import About              from './components/About/About'
+import Projects           from './components/Projects/Projects'
 import PageFlipTransition from './components/PageFlipTransition/PageFlipTransition'
 
 export default function App() {
@@ -10,7 +11,12 @@ export default function App() {
       <main>
         <PageFlipTransition
           hero={<Hero />}
-          about={<About />}
+          about={
+            <>
+              <About />
+              <Projects />
+            </>
+          }
         />
       </main>
     </>

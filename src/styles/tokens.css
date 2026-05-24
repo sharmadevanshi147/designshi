@@ -12,7 +12,7 @@
   --color-ink-12:       rgba(16, 16, 16, 0.12);
 
   /* Notebook ruled line */
-  --color-line:         #D4C3AF;
+  --color-line:         rgba(212, 195, 175, 0.30);
   --line-gap:           48px;
 
   /* Navbar surface */
