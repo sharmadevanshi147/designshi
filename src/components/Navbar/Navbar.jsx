@@ -1,107 +1,145 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
+import { useTheme } from '../../context/ThemeContext'
+import { useCursor } from '../../context/CursorContext'
 import styles from './Navbar.module.css'
 
-/* ── Nav items from Figma ── */
-const NAV_LINKS = [
-  { label: 'Resume',     href: '#resume'   },
-  { label: 'Projects',   href: '#projects' },
-  { label: 'About Me',   href: '#about'    },
-  { label: 'Contact Me', href: '#contact'  },
-]
+const EXPO = [0.16, 1, 0.3, 1]
 
-/* ── Animation variants ── */
-const navVariants = {
-  hidden:  { y: -90, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-  },
-}
-
-const linkContainerVariants = {
-  hidden:  {},
-  visible: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.3 },
-  },
-}
-
-const linkVariants = {
-  hidden:  { y: -10, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-  },
+const THEME_ICONS = {
+  light: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+  ),
+  dark: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  ),
+  sepia: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  ),
 }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const shouldReduce = useReducedMotion()
-  const ticking = useRef(false)
+  const { theme, cycleTheme } = useTheme()
+  const { mode, toggleCursor } = useCursor()
+  const location = useLocation()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
-    const onScroll = () => {
-      if (!ticking.current) {
-        requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 20)
-          ticking.current = false
-        })
-        ticking.current = true
-      }
-    }
+    const onScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const handleNavClick = (e, href) => {
+    if (!isHome || !href.startsWith('#')) return
+    e.preventDefault()
+    const id = href.slice(1)
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <motion.header
       className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
-      variants={navVariants}
-      initial={shouldReduce ? 'visible' : 'hidden'}
-      animate="visible"
-      role="banner"
+      initial={shouldReduce ? false : { y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: EXPO }}
     >
-      <nav className={styles.navInner} aria-label="Primary navigation">
+      <nav className={styles.inner} aria-label="Primary navigation">
+
+        {/* Logo */}
+        <Link to="/" className={styles.logo} aria-label="Devanshi Sharma — home">
+          <span className={styles.logoD}>D</span>
+          <span className={styles.logoDot}>·</span>
+          <span className={styles.logoS}>S</span>
+        </Link>
+
+        {/* Nav links */}
         <motion.ul
-          className={styles.linkList}
-          variants={linkContainerVariants}
-          initial={shouldReduce ? 'visible' : 'hidden'}
-          animate="visible"
+          className={styles.links}
+          initial={shouldReduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           role="list"
         >
-          {NAV_LINKS.map(({ label, href }) => (
-            <motion.li key={label} variants={linkVariants}>
-              <NavItem href={href} label={label} />
-            </motion.li>
+          {[
+            { label: 'Work',     href: '#projects' },
+            { label: 'About',    href: '#about'    },
+            { label: 'Life',     href: '#life'     },
+          ].map(({ label, href }) => (
+            <li key={label}>
+              <a
+                href={isHome ? href : `/${href}`}
+                className={styles.link}
+                onClick={(e) => handleNavClick(e, href)}
+              >
+                {label}
+              </a>
+            </li>
           ))}
+          <li>
+            <a
+              href="https://linkedin.com/in/devanshi-sharma-746470213"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.link} ${styles.linkResume}`}
+            >
+              Resume ↗
+            </a>
+          </li>
         </motion.ul>
+
+        {/* Controls */}
+        <div className={styles.controls}>
+          {/* Cursor toggle */}
+          <button
+            className={`${styles.iconBtn} ${mode === 'pencil' ? styles.active : ''}`}
+            onClick={toggleCursor}
+            aria-label={`${mode === 'pencil' ? 'Disable' : 'Enable'} sparkle cursor`}
+            title={mode === 'pencil' ? 'Cursor: Design mode ✦' : 'Cursor: Default'}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/>
+              <circle cx="11" cy="11" r="2"/>
+            </svg>
+            {mode === 'pencil' && <span className={styles.activeDot} aria-hidden="true"/>}
+          </button>
+
+          {/* Theme toggle */}
+          <button
+            className={styles.iconBtn}
+            onClick={cycleTheme}
+            aria-label={`Switch theme (current: ${theme})`}
+            title={`Theme: ${theme}`}
+          >
+            <motion.span
+              key={theme}
+              initial={{ scale: 0.5, rotate: -90, opacity: 0 }}
+              animate={{ scale: 1, rotate: 0, opacity: 1 }}
+              exit={{ scale: 0.5, rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.25, ease: EXPO }}
+            >
+              {THEME_ICONS[theme]}
+            </motion.span>
+          </button>
+
+          {/* Contact CTA */}
+          <a
+            href="mailto:devanshisharma3574@gmail.com"
+            className={styles.ctaBtn}
+          >
+            Say hi ✉︎
+          </a>
+        </div>
       </nav>
     </motion.header>
-  )
-}
-
-/* ── Individual nav link with animated underline ── */
-function NavItem({ href, label }) {
-  return (
-    <motion.a
-      href={href}
-      className={styles.navLink}
-      whileHover="hovered"
-      initial="rest"
-      animate="rest"
-    >
-      <span className={styles.linkText}>{label}</span>
-      <motion.span
-        className={styles.underline}
-        variants={{
-          rest:    { scaleX: 0, originX: 0 },
-          hovered: { scaleX: 1, originX: 0 },
-        }}
-        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-        aria-hidden="true"
-      />
-    </motion.a>
   )
 }

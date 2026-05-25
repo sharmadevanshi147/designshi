@@ -1,4 +1,4 @@
-/* Full-viewport book stage — both pages live here */
+/* Full-viewport book stage — all pages live here */
 .stage {
   position: relative;
   height: 100vh;
@@ -7,15 +7,21 @@
   perspective-origin: 50% 50%;
 }
 
-/* ── About page: always behind, scrolls its own content ── */
-.behindPage {
+/* ─────────────────────────────────────────────
+   Shared ruled-notebook background mixin
+   (duplicated per page because CSS Modules
+   don't support a @mixin shorthand)
+───────────────────────────────────────────── */
+
+/* ── Page 3: Projects — bottommost, always visible behind ── */
+.projectsPage {
   position: absolute;
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
 
-  /* Same ruled-notebook background as the body */
+  /* ruled notebook bg scrolls with content */
   background-color: var(--color-bg);
   background-image: linear-gradient(
     to bottom,
@@ -26,8 +32,8 @@
   background-attachment: local;
 }
 
-/* ── Hero page: flips right-to-left (left edge is pivot) ── */
-.heroPage {
+/* ── Page 2: About — flips right-to-left over Projects ── */
+.aboutPage {
   position: absolute;
   inset: 0;
   transform-origin: left center;
@@ -35,8 +41,29 @@
   -webkit-backface-visibility: hidden;
   z-index: 2;
   will-change: transform;
+  overflow: hidden; /* About fits in one viewport — no scroll */
 
-  /* Ruled-notebook background on the page itself during the 3-D flip */
+  /* same ruled notebook bg */
+  background-color: var(--color-bg);
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(var(--line-gap) - 0.5px),
+    var(--color-line) 0.5px
+  );
+  background-size: 100% var(--line-gap);
+}
+
+/* ── Page 1: Hero — flips right-to-left over About ── */
+.heroPage {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 3;
+  will-change: transform;
+
+  /* same ruled notebook bg visible during 3-D flip */
   background-color: var(--color-bg);
   background-image: linear-gradient(
     to bottom,

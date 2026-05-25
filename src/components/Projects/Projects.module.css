@@ -1,8 +1,8 @@
 /* ══════════════════════════════════════════════════════════
    Projects — sticky stacking cards
-   Each .cardWrap is 100 vh tall so the browser has scroll
-   space; the .card inside is position:sticky so it pins
-   while the next card slides up over it.
+   All three cards in ONE .stack parent.
+   Sticky wrapper → no transforms.
+   motion.article (inside) → transforms only.
    ══════════════════════════════════════════════════════════ */
 
 .projects {
@@ -22,17 +22,17 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-ink-40);
+  color: var(--color-ink-30);
   margin-bottom: 14px;
 }
 
 .heading {
-  font-family: var(--font-darker);
+  font-family: var(--font-syne);
   font-size: clamp(2.75rem, 6.5vw, 5.5rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.0;
-  letter-spacing: -0.03em;
-  color: #151516;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
   margin-bottom: 18px;
 }
 
@@ -40,73 +40,98 @@
   font-family: var(--font-dm);
   font-size: 1rem;
   line-height: 1.65;
-  color: var(--color-ink-70);
+  color: var(--color-ink-50);
   max-width: 440px;
   margin: 0 auto;
 }
 
-/* ── Sticky stack container ── */
+/* ── Stack container ── */
 .stack {
-  padding: 0 48px;
+  position: relative;
+  padding: 0 48px 0;
   max-width: 1280px;
   margin: 0 auto;
+  padding-bottom: calc(240vh + 100px);
 }
 
-/* Each wrapper provides 100 vh of scroll distance for its card */
-.cardWrap {
-  height: 100vh;
-}
+.stackEnd { height: 60vh; }
 
-/* Bottom spacer so the last card has room to un-stick */
-.stackSpacer {
-  height: 40vh;
-}
-
-/* ── The card itself ── */
-.card {
+/* ── Sticky wrapper: position:sticky lives HERE, no transforms ── */
+.cardSticky {
   position: sticky;
-  /* top is set inline per card (staggered offsets) */
-  border-radius: 32px;
-  overflow: hidden;
-
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 0;
-
-  /* Height = viewport minus navbar minus the staggered top offset */
   height: calc(100vh - var(--navbar-height) - 64px);
   max-height: 780px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.04),
-    0 12px 40px rgba(0,0,0,0.08);
-
-  will-change: transform, opacity;
+  margin-bottom: 80vh;
 }
 
-/* ── Left: text block ── */
+.cardSticky:last-of-type { margin-bottom: 0; }
+
+/* ── Inner card: visual + transforms only, NO sticky ── */
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0;
+  box-shadow: var(--shadow-card);
+  will-change: transform, opacity;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.08),
+    0 24px 72px rgba(0,0,0,0.14);
+}
+
+/* ── Left: text ── */
 .textBlock {
   padding: 44px 40px 44px 48px;
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
-.cardIndex {
-  font-family: var(--font-dm);
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cardNum {
+  font-family: var(--font-syne);
   font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: rgba(21,21,22,0.25);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--font-dm);
+  font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: rgba(21,21,22,0.35);
-  margin-bottom: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(21,21,22,0.5);
+  background: rgba(21,21,22,0.07);
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
 .cardTitle {
-  font-family: var(--font-darker);
+  font-family: var(--font-syne);
   font-size: clamp(1.75rem, 2.8vw, 2.75rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: #151516;
   margin-bottom: 8px;
 }
@@ -124,34 +149,11 @@
   font-family: var(--font-dm);
   font-size: 0.9375rem;
   line-height: 1.7;
-  color: rgba(21,21,22,0.72);
+  color: rgba(21,21,22,0.70);
   flex: 1;
 }
 
-.footer {
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag {
-  font-family: var(--font-dm);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(21,21,22,0.55);
-  background: rgba(21,21,22,0.07);
-  padding: 5px 12px;
-  border-radius: 999px;
-}
+.footer { margin-top: 32px; }
 
 .viewBtn {
   display: inline-flex;
@@ -159,30 +161,29 @@
   gap: 8px;
   font-family: var(--font-dm);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #151516;
   text-decoration: none;
-  transition: gap 200ms ease;
+  transition: gap 0.2s;
+  padding: 10px 0;
+  border-bottom: 1.5px solid rgba(21,21,22,0.2);
 }
-.viewBtn:hover { gap: 14px; }
-.viewBtn:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
-  border-radius: 4px;
-}
+
+.viewBtn:hover        { gap: 16px; border-bottom-color: #151516; }
+.viewBtn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
 
 /* ── Right: browser mockup ── */
 .mockup {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 0 32px 32px 0;
+  border-radius: 0 28px 28px 0;
 }
 
 .mockupBar {
   height: 36px;
   flex-shrink: 0;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -190,8 +191,7 @@
 }
 
 .dot {
-  width: 11px;
-  height: 11px;
+  width: 11px; height: 11px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -200,7 +200,7 @@
   flex: 1;
   height: 18px;
   border-radius: 4px;
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.06);
   margin-left: 8px;
 }
 
@@ -215,12 +215,24 @@
   overflow: hidden;
 }
 
+.mockupYear {
+  font-family: var(--font-dm);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
 .mockupLabel {
-  font-family: var(--font-darker);
+  font-family: var(--font-syne);
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -229,15 +241,15 @@
 
 .mockupSub {
   font-family: var(--font-dm);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.40);
   text-align: center;
   line-height: 1.5;
   position: relative;
   z-index: 1;
-  max-width: 340px;
+  max-width: 320px;
 }
 
-/* Subtle ruled lines inside the mockup for texture */
 .mockupGrid {
   position: absolute;
   inset: 0;
@@ -246,36 +258,37 @@
   justify-content: space-evenly;
   pointer-events: none;
 }
+
 .mockupGridLine {
   width: 100%;
-  border-top: 1px solid transparent; /* colour set inline */
+  border-top: 1px solid transparent;
 }
 
-/* ─────────────────────────────────────────────
-   Responsive
-───────────────────────────────────────────── */
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-  .stack   { padding: 0 28px; }
-  .header  { padding: 72px 40px 48px; }
+  .stack { padding: 0 28px; }
+  .header { padding: 72px 40px 48px; }
   .textBlock { padding: 36px 32px; }
-  .card    { grid-template-columns: 1fr 1fr; }
+  .card { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-  .card {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+  .cardSticky {
     height: auto;
     min-height: calc(100vh - var(--navbar-height) - 40px);
     max-height: none;
   }
-  .mockup { border-radius: 0 0 32px 32px; min-height: 260px; }
+  .card {
+    grid-template-columns: 1fr;
+    height: 100%;
+    min-height: calc(100vh - var(--navbar-height) - 40px);
+  }
+  .mockup { border-radius: 0 0 28px 28px; min-height: 240px; }
   .header { padding: 60px 24px 40px; }
-  .stack  { padding: 0 16px; }
+  .stack { padding: 0 16px; }
 }
 
 @media (max-width: 480px) {
   .textBlock { padding: 28px 24px; }
   .cardTitle { font-size: 1.5rem; }
-  .viewBtn   { font-size: 0.875rem; }
 }

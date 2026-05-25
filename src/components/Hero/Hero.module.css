@@ -1,106 +1,278 @@
-/* ═══════════════════════════════════════════
-   Hero — PF Design, Component 1
-   1728 × 777 · padding 64 · center-stacked
-   ═══════════════════════════════════════════ */
-
 .hero {
+  position: relative;
   width: 100%;
-  min-height: 777px;
-  background: transparent; /* notebook lines bleed through from body */
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* 64px Figma padding + navbar height so text clears the bar */
-  padding: calc(var(--navbar-height) + 64px) 64px 64px;
-  box-sizing: border-box;
-}
-
-/* ── Vertical stack ── */
-.stack {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  justify-content: center;
+  padding: calc(var(--navbar-height) + 60px) 64px 80px;
+  overflow: hidden;
 }
 
-/* ─────────────────────────────────────────────
-   "Hi, I'm"
-   DM Sans · Regular · 200px · #151516
-───────────────────────────────────────────── */
-.greetingWrap {
-  /* Figma inner gap = −52px → overlap "Devanshi" upward */
-  margin-bottom: -52px;
+/* ── Background deco ── */
+.deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+.decoBlob1 {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  opacity: 0.08;
+  top: -100px; right: -150px;
+  filter: blur(60px);
+  animation: float 8s ease-in-out infinite;
+}
+
+.decoBlob2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-2) 0%, transparent 70%);
+  opacity: 0.07;
+  bottom: -50px; left: -80px;
+  filter: blur(50px);
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.decoGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-ink-10) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink-10) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+  opacity: 0.4;
+}
+
+/* ── Content ── */
+.content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  max-width: 1000px;
+}
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-dm);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-50);
+  margin-bottom: 28px;
+  padding: 7px 16px;
+  border: 1px solid var(--color-ink-10);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.eyebrowDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-mint);
+  flex-shrink: 0;
+  animation: pulse-ring 2s ease infinite;
+  box-shadow: 0 0 0 0 var(--color-accent-mint);
+}
+
+/* Name block */
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .greeting {
   font-family: var(--font-dm);
-  font-size: var(--hero-hi);   /* clamp(3rem, 11.6vw, 12.5rem) */
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: #151516;
-  text-align: center;
-  margin: 0;
+  font-size: var(--hero-hi);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-ink-50);
+  margin-bottom: -0.08em;
 }
 
-/* ─────────────────────────────────────────────
-   "Devanshi"
-   Fredoka One · 240px · #EA5DB4 · ls −1%
-───────────────────────────────────────────── */
 .nameWrap {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 8px;
+  perspective: 800px;
+  line-height: 0.95;
 }
 
 .name {
   display: block;
-  font-family: var(--font-fredoka);
-  font-size: var(--hero-name); /* clamp(3.6rem, 13.9vw, 15rem) */
-  font-weight: 400;
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  color: #EA5DB4;
-  text-align: center;
-  text-shadow: 0 2px 32px rgba(234, 93, 180, 0.18);
-  perspective: 600px;
+  font-family: var(--font-syne);
+  font-size: var(--hero-name);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
 }
 
-/* ─────────────────────────────────────────────
-   "UX Designer & Developer"
-   Darker Grotesque · SemiBold · 44px · #151516
-───────────────────────────────────────────── */
-.subtitle {
-  font-family: var(--font-darker);
-  font-size: var(--hero-sub);  /* clamp(1.1rem, 2.55vw, 2.75rem) */
+/* Tagline */
+.taglineWrap {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  color: var(--color-ink-70);
+  text-align: center;
+}
+
+/* CTAs */
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-family: var(--font-dm);
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: #151516;
-  text-align: center;
-  margin: 0;
-  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s, gap 0.2s;
 }
 
-/* ─────────────────────────────────────────────
-   Responsive
-───────────────────────────────────────────── */
+.ctaPrimary:hover {
+  opacity: 0.82;
+  transform: translateY(-2px);
+  gap: 14px;
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-ink-30);
+  color: var(--color-ink);
+  font-family: var(--font-dm);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+
+.ctaSecondary:hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink-10);
+  transform: translateY(-2px);
+}
+
+/* Personality note */
+.note {
+  font-family: var(--font-dm);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-ink-50);
+  text-align: center;
+}
+
+.note em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* ── Socials sidebar ── */
+.socials {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+
+.socialLink {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-70);
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+}
+
+.socialLink:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: transparent;
+  transform: scale(1.1);
+}
+
+/* ── Scroll cue ── */
+.scrollCue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scrollText {
+  font-family: var(--font-dm);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-30);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--color-ink-30), transparent);
+  animation: scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-  .hero {
-    padding: calc(var(--navbar-height) + 48px) 40px 48px;
-    min-height: 600px;
-  }
-  .greetingWrap { margin-bottom: -36px; }
+  .hero { padding: calc(var(--navbar-height) + 48px) 48px 64px; }
+  .socials { display: none; }
 }
 
 @media (max-width: 640px) {
-  .hero {
-    padding: calc(var(--navbar-height) + 32px) 24px 32px;
-    min-height: 480px;
-  }
-  .greetingWrap { margin-bottom: -24px; }
+  .hero { padding: calc(var(--navbar-height) + 32px) 24px 48px; }
+  .decoBlob1, .decoBlob2 { display: none; }
 }

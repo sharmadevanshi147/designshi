@@ -2,108 +2,130 @@ import { useRef, useEffect, useCallback, createContext } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import styles from './PageFlipTransition.module.css'
 
-/** Provides the behindPage scroll container ref to deep children (e.g. Projects) */
+/**
+ * Provides the Projects scroll-container ref to deep children
+ * (used by ProjectCard → useScroll)
+ */
 export const ScrollContainerCtx = createContext(null)
 
 const FLIP_DURATION = 0.72
+const EASE = [0.4, 0, 0.2, 1]
 
-export default function PageFlipTransition({ hero, about }) {
-  const behindRef = useRef(null)
-  const controls  = useAnimation()
+/** Returns a mid-animation box-shadow sequence */
+const shadow = (dir) => [
+  '0px 0px 0px 0px rgba(0,0,0,0)',
+  `${dir * 22}px 0px 64px 12px rgba(0,0,0,0.16)`,
+  '0px 0px 0px 0px rgba(0,0,0,0)',
+]
 
-  // Mutable flags — never trigger re-renders
+export default function PageFlipTransition({ hero, about, projects }) {
+  const projectsRef = useRef(null)   // scrollable projects container
+
+  const heroControls  = useAnimation()  // controls heroPage
+  const aboutControls = useAnimation()  // controls aboutPage
+
+  // page: 0 = Hero visible, 1 = About visible, 2 = Projects visible
+  const page     = useRef(0)
   const flipping = useRef(false)
-  const onAbout  = useRef(false)
 
-  // Keep latest callbacks in refs so event listeners never go stale
-  const flipForwardRef = useRef(null)
-  const flipBackRef    = useRef(null)
+  // Stable refs so event listeners never capture stale closures
+  const heroFwdRef   = useRef(null)
+  const heroBackRef  = useRef(null)
+  const aboutFwdRef  = useRef(null)
+  const aboutBackRef = useRef(null)
 
-  /* ── Forward: Hero → About ── */
-  const flipForward = useCallback(() => {
-    if (flipping.current || onAbout.current) return
+  /* ── Hero → About ──────────────────────────────────────── */
+  const flipHeroForward = useCallback(() => {
+    if (flipping.current || page.current !== 0) return
     flipping.current = true
+    heroControls
+      .start({ rotateY: -180, boxShadow: shadow(1), transition: { duration: FLIP_DURATION, ease: EASE } })
+      .then(() => { flipping.current = false; page.current = 1 })
+  }, [heroControls])
 
-    controls
-      .start({
-        rotateY: -180,
-        boxShadow: [
-          '0px 0px 0px 0px rgba(0,0,0,0)',
-          '22px 0px 64px 12px rgba(0,0,0,0.16)',
-          '0px 0px 0px 0px rgba(0,0,0,0)',
-        ],
-        transition: { duration: FLIP_DURATION, ease: [0.4, 0, 0.2, 1] },
-      })
+  /* ── About → Hero ──────────────────────────────────────── */
+  const flipHeroBack = useCallback(() => {
+    if (flipping.current || page.current !== 1) return
+    flipping.current = true
+    page.current = 0
+    heroControls
+      .start({ rotateY: 0, boxShadow: shadow(-1), transition: { duration: FLIP_DURATION, ease: EASE } })
+      .then(() => { flipping.current = false })
+  }, [heroControls])
+
+  /* ── About → Projects ──────────────────────────────────── */
+  const flipAboutForward = useCallback(() => {
+    if (flipping.current || page.current !== 1) return
+    flipping.current = true
+    aboutControls
+      .start({ rotateY: -180, boxShadow: shadow(1), transition: { duration: FLIP_DURATION, ease: EASE } })
       .then(() => {
         flipping.current = false
-        onAbout.current  = true
-        // Scroll the About panel to top whenever we land on it
-        if (behindRef.current) behindRef.current.scrollTop = 0
+        page.current = 2
+        if (projectsRef.current) projectsRef.current.scrollTop = 0
       })
-  }, [controls])
+  }, [aboutControls])
 
-  /* ── Back: About → Hero ── */
-  const flipBack = useCallback(() => {
-    if (flipping.current || !onAbout.current) return
+  /* ── Projects → About ──────────────────────────────────── */
+  const flipAboutBack = useCallback(() => {
+    if (flipping.current || page.current !== 2) return
     flipping.current = true
-    onAbout.current  = false
+    page.current = 1
+    aboutControls
+      .start({ rotateY: 0, boxShadow: shadow(-1), transition: { duration: FLIP_DURATION, ease: EASE } })
+      .then(() => { flipping.current = false })
+  }, [aboutControls])
 
-    controls
-      .start({
-        rotateY: 0,
-        boxShadow: [
-          '0px 0px 0px 0px rgba(0,0,0,0)',
-          '-22px 0px 64px 12px rgba(0,0,0,0.16)',
-          '0px 0px 0px 0px rgba(0,0,0,0)',
-        ],
-        transition: { duration: FLIP_DURATION, ease: [0.4, 0, 0.2, 1] },
-      })
-      .then(() => {
-        flipping.current = false
-      })
-  }, [controls])
+  // Keep stable refs in sync every render
+  useEffect(() => { heroFwdRef.current   = flipHeroForward  }, [flipHeroForward])
+  useEffect(() => { heroBackRef.current  = flipHeroBack     }, [flipHeroBack])
+  useEffect(() => { aboutFwdRef.current  = flipAboutForward }, [flipAboutForward])
+  useEffect(() => { aboutBackRef.current = flipAboutBack    }, [flipAboutBack])
 
-  // Keep refs current every render
-  useEffect(() => { flipForwardRef.current = flipForward }, [flipForward])
-  useEffect(() => { flipBackRef.current    = flipBack    }, [flipBack])
-
-  /* ── Window wheel — fires when Hero is the front page ── */
+  /* ── Window wheel — handles page 0 (Hero) and page 1 (About) ── */
   useEffect(() => {
     const onWheel = (e) => {
-      if (onAbout.current) return
-      if (e.deltaY > 0) {
-        e.preventDefault()
-        flipForwardRef.current?.()
+      const p = page.current
+      if (p === 0 && e.deltaY > 0) {
+        e.preventDefault(); heroFwdRef.current?.()
+      } else if (p === 1 && e.deltaY > 0) {
+        e.preventDefault(); aboutFwdRef.current?.()
+      } else if (p === 1 && e.deltaY < 0) {
+        e.preventDefault(); heroBackRef.current?.()
       }
     }
     window.addEventListener('wheel', onWheel, { passive: false })
     return () => window.removeEventListener('wheel', onWheel)
   }, [])
 
-  /* ── behindPage wheel — fires when About is the front page ── */
+  /* ── Projects container wheel — back-flip at scroll top ── */
   useEffect(() => {
-    const el = behindRef.current
+    const el = projectsRef.current
     if (!el) return
-    const onBehindWheel = (e) => {
-      if (!onAbout.current) return
+    const onWheel = (e) => {
+      if (page.current !== 2) return
       if (el.scrollTop === 0 && e.deltaY < 0) {
-        e.preventDefault()
-        flipBackRef.current?.()
+        e.preventDefault(); aboutBackRef.current?.()
       }
     }
-    el.addEventListener('wheel', onBehindWheel, { passive: false })
-    return () => el.removeEventListener('wheel', onBehindWheel)
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
   }, [])
 
   /* ── Touch support ── */
   useEffect(() => {
     let startY = 0
     const onTouchStart = (e) => { startY = e.touches[0].clientY }
-    const onTouchEnd   = (e) => {
+    const onTouchEnd = (e) => {
       const dy = startY - e.changedTouches[0].clientY
-      if (dy > 40 && !onAbout.current)  flipForwardRef.current?.()
-      if (dy < -40 && onAbout.current && behindRef.current?.scrollTop === 0)
-        flipBackRef.current?.()
+      const p  = page.current
+      if (dy > 40) {
+        if (p === 0) heroFwdRef.current?.()
+        else if (p === 1) aboutFwdRef.current?.()
+      } else if (dy < -40) {
+        if (p === 1) heroBackRef.current?.()
+        else if (p === 2 && projectsRef.current?.scrollTop === 0) aboutBackRef.current?.()
+      }
     }
     window.addEventListener('touchstart', onTouchStart, { passive: true })
     window.addEventListener('touchend',   onTouchEnd,   { passive: true })
@@ -115,21 +137,32 @@ export default function PageFlipTransition({ hero, about }) {
 
   return (
     <div className={styles.stage}>
-      {/* About + Projects — live behind the hero, scrollable within the viewport */}
-      <ScrollContainerCtx.Provider value={behindRef}>
-        <div className={styles.behindPage} ref={behindRef}>
-          {about}
+
+      {/* ── Page 3: Projects — bottommost, scrollable ── */}
+      <ScrollContainerCtx.Provider value={projectsRef}>
+        <div className={styles.projectsPage} ref={projectsRef}>
+          {projects}
         </div>
       </ScrollContainerCtx.Provider>
 
-      {/* Hero — flips forward (right-to-left) and back (left-to-right) */}
+      {/* ── Page 2: About — flips over Projects ── */}
+      <motion.div
+        className={styles.aboutPage}
+        animate={aboutControls}
+        initial={{ rotateY: 0 }}
+      >
+        {about}
+      </motion.div>
+
+      {/* ── Page 1: Hero — flips over About ── */}
       <motion.div
         className={styles.heroPage}
-        animate={controls}
+        animate={heroControls}
         initial={{ rotateY: 0 }}
       >
         {hero}
       </motion.div>
+
     </div>
   )
 }
