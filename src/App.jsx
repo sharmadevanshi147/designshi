@@ -1,18 +1,47 @@
-import Navbar            from './components/Navbar/Navbar'
-import Hero              from './components/Hero/Hero'
-import About             from './components/About/About'
-import PageFlipTransition from './components/PageFlipTransition/PageFlipTransition'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ThemeProvider }  from './context/ThemeContext'
+import { CursorProvider } from './context/CursorContext'
+import Cursor        from './components/Cursor/Cursor'
+import Navbar        from './components/Navbar/Navbar'
+import Hero          from './components/Hero/Hero'
+import About         from './components/About/About'
+import Projects      from './components/Projects/Projects'
+import Photobook     from './components/Photobook/Photobook'
+import DesignProcess from './components/DesignProcess/DesignProcess'
+import Experience    from './components/Experience/Experience'
+import Footer        from './components/Footer/Footer'
+import ProjectPage   from './pages/ProjectPage/ProjectPage'
 
-export default function App() {
+function HomePage() {
   return (
     <>
       <Navbar />
       <main>
-        <PageFlipTransition
-          hero={<Hero />}
-          about={<About />}
-        />
+        <Hero />
+        <About />
+        <Projects />
+        <Photobook />
+        <DesignProcess />
+        <Experience />
+        <Footer />
       </main>
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider>
+        <CursorProvider>
+          <Cursor />
+          <Routes>
+            <Route path="/"               element={<HomePage />} />
+            <Route path="/projects/:slug" element={<><Navbar /><ProjectPage /></>} />
+            <Route path="*"               element={<HomePage />} />
+          </Routes>
+        </CursorProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
