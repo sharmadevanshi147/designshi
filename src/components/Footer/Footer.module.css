@@ -1,7 +1,8 @@
 .footer {
   width: 100%;
-  background: var(--color-ink);
-  color: var(--color-bg);
+  /* Always dark regardless of theme — uses dedicated footer tokens */
+  background: var(--color-footer-bg, #111110);
+  color: var(--color-footer-ink, #F0EDE6);
   padding: 100px 60px 48px;
   position: relative;
   overflow: hidden;
@@ -38,20 +39,19 @@
 }
 
 .ctaHeading {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: clamp(3rem, 9vw, 9rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.03em;
   line-height: 0.95;
   color: #fff;
   margin-bottom: 36px;
 }
 
 .ctaAccent {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-accent);
+  -webkit-text-fill-color: var(--color-accent);
 }
 
 .ctaBtn {

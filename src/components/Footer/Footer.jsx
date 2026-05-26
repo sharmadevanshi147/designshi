@@ -33,8 +33,8 @@ export default function Footer() {
         </div>
 
         <p className={styles.note}>
-          probably designed at 4:18am,{' '}
-          <em>running on caffeine and unnecessary perfectionism ;)</em>
+          designed with obsessive care —{' '}
+          <em>somewhere between a deadline and a dream ✦</em>
         </p>
 
         <div className={styles.socials}>

@@ -23,7 +23,7 @@ const JOBS = [
     role: 'UX Designer',
     period: 'Jan 2024 – Jun 2024',
     location: 'Hybrid',
-    color: '#7C6EFF',
+    color: '#2A9D8F',
     highlights: [
       'User research with 20+ participants to guide wireframing & prototyping',
       'Created 100+ intuitive, engaging interfaces through iterative design',

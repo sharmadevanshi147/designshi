@@ -1,145 +1,149 @@
 /* ═══════════════════════════════════════════════════════════
    PORTFOLIO — Design Tokens
-   Three themes: light (default), dark, sepia
+   Palette: Pink · Beige · Black — no purple ever.
+   2 fonts: Playfair Display (display) + DM Sans (body)
 ═══════════════════════════════════════════════════════════ */
 
-/* ── LIGHT (default) ── */
+/* ── LIGHT (default, cream) ── */
 :root,
 :root[data-theme="light"] {
-  --color-bg:          #FFFDF7;
-  --color-surface:     #FFF8F0;
-  --color-ink:         #151516;
-  --color-ink-70:      rgba(21, 21, 22, 0.70);
-  --color-ink-50:      rgba(21, 21, 22, 0.50);
-  --color-ink-30:      rgba(21, 21, 22, 0.30);
-  --color-ink-10:      rgba(21, 21, 22, 0.10);
+  --color-bg:        #FFFDF7;
+  --color-surface:   #FFF8EE;
+  --color-ink:       #151516;
+  --color-ink-70:    rgba(21, 21, 22, 0.70);
+  --color-ink-50:    rgba(21, 21, 22, 0.50);
+  --color-ink-30:    rgba(21, 21, 22, 0.30);
+  --color-ink-10:    rgba(21, 21, 22, 0.08);
 
-  --color-accent:      #EA5DB4;
-  --color-accent-2:    #7C6EFF;
-  --color-accent-warm: #F59E0B;
-  --color-accent-mint: #10B981;
+  --color-accent:    #EA5DB4;
+  --color-accent-lt: rgba(234, 93, 180, 0.12);
 
-  --color-line:        rgba(212, 195, 175, 0.30);
-  --line-gap:          48px;
+  --color-line:      rgba(212, 195, 175, 0.35);
+  --line-gap:        44px;
 
-  --color-nav-bg:      rgba(255, 253, 247, 0.88);
-  --color-card-1:      #C3F6FF;
-  --color-card-2:      #FFE4F3;
-  --color-card-3:      #FFF3C4;
+  --color-nav-bg:    rgba(255, 253, 247, 0.90);
+  --color-about-bg:  #FFFAEE;
 
-  --color-about-bg:    #FFFAEE;
-  --color-tag-bg:      rgba(21, 21, 22, 0.07);
-  --color-tag-ink:     rgba(21, 21, 22, 0.55);
+  --color-card-1:    #C8F0F8;
+  --color-card-2:    #FADADF;
+  --color-card-3:    #F9F0C0;
 
-  --shadow-card:       0 2px 8px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.08);
-  --shadow-nav:        0 1px 0 var(--color-line);
-  --shadow-float:      0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --color-tag-bg:    rgba(21, 21, 22, 0.06);
+  --color-tag-ink:   rgba(21, 21, 22, 0.55);
+
+  --shadow-card:     0 2px 8px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.07);
+  --shadow-nav:      0 1px 0 var(--color-line);
+  --shadow-float:    0 6px 24px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.05);
+
+  /* Footer always dark regardless of theme */
+  --color-footer-bg:  #111110;
+  --color-footer-ink: #F0EDE6;
 }
 
 /* ── DARK ── */
 :root[data-theme="dark"] {
-  --color-bg:          #0C0C0C;
-  --color-surface:     #161616;
-  --color-ink:         #F2F0EB;
-  --color-ink-70:      rgba(242, 240, 235, 0.70);
-  --color-ink-50:      rgba(242, 240, 235, 0.50);
-  --color-ink-30:      rgba(242, 240, 235, 0.30);
-  --color-ink-10:      rgba(242, 240, 235, 0.10);
+  --color-bg:        #0C0C0C;
+  --color-surface:   #161616;
+  --color-ink:       #F0EDE6;
+  --color-ink-70:    rgba(240, 237, 230, 0.70);
+  --color-ink-50:    rgba(240, 237, 230, 0.50);
+  --color-ink-30:    rgba(240, 237, 230, 0.30);
+  --color-ink-10:    rgba(240, 237, 230, 0.08);
 
-  --color-accent:      #D4FF5E;
-  --color-accent-2:    #B09FFF;
-  --color-accent-warm: #FFB84D;
-  --color-accent-mint: #34D399;
+  --color-accent:    #F472B6;
+  --color-accent-lt: rgba(244, 114, 182, 0.15);
 
-  --color-line:        rgba(255, 255, 255, 0.07);
-  --line-gap:          48px;
+  --color-line:      rgba(255, 255, 255, 0.07);
+  --line-gap:        44px;
 
-  --color-nav-bg:      rgba(12, 12, 12, 0.88);
-  --color-card-1:      #0D2229;
-  --color-card-2:      #220D1A;
-  --color-card-3:      #1C1A00;
+  --color-nav-bg:    rgba(12, 12, 12, 0.90);
+  --color-about-bg:  #141210;
 
-  --color-about-bg:    #141210;
-  --color-tag-bg:      rgba(242, 240, 235, 0.10);
-  --color-tag-ink:     rgba(242, 240, 235, 0.60);
+  --color-card-1:    #0F2028;
+  --color-card-2:    #1E0A10;
+  --color-card-3:    #1A1600;
 
-  --shadow-card:       0 2px 8px rgba(0,0,0,0.40), 0 16px 48px rgba(0,0,0,0.50);
-  --shadow-nav:        0 1px 0 var(--color-line);
-  --shadow-float:      0 8px 32px rgba(0,0,0,0.50), 0 2px 8px rgba(0,0,0,0.30);
+  --color-tag-bg:    rgba(240, 237, 230, 0.08);
+  --color-tag-ink:   rgba(240, 237, 230, 0.55);
+
+  --shadow-card:     0 2px 8px rgba(0,0,0,0.40), 0 12px 40px rgba(0,0,0,0.50);
+  --shadow-nav:      0 1px 0 var(--color-line);
+  --shadow-float:    0 6px 24px rgba(0,0,0,0.50), 0 2px 6px rgba(0,0,0,0.30);
+
+  /* Footer always dark regardless of theme */
+  --color-footer-bg:  #0A0A0A;
+  --color-footer-ink: #F0EDE6;
 }
 
 /* ── SEPIA ── */
 :root[data-theme="sepia"] {
-  --color-bg:          #F4ECD8;
-  --color-surface:     #EDE0C8;
-  --color-ink:         #2D1B00;
-  --color-ink-70:      rgba(45, 27, 0, 0.70);
-  --color-ink-50:      rgba(45, 27, 0, 0.50);
-  --color-ink-30:      rgba(45, 27, 0, 0.30);
-  --color-ink-10:      rgba(45, 27, 0, 0.10);
+  --color-bg:        #F5EDDA;
+  --color-surface:   #EDE2CC;
+  --color-ink:       #2D1B00;
+  --color-ink-70:    rgba(45, 27, 0, 0.70);
+  --color-ink-50:    rgba(45, 27, 0, 0.50);
+  --color-ink-30:    rgba(45, 27, 0, 0.30);
+  --color-ink-10:    rgba(45, 27, 0, 0.08);
 
-  --color-accent:      #C4622D;
-  --color-accent-2:    #6B5B3E;
-  --color-accent-warm: #D4812C;
-  --color-accent-mint: #5C8A6F;
+  --color-accent:    #C4622D;
+  --color-accent-lt: rgba(196, 98, 45, 0.12);
 
-  --color-line:        rgba(160, 130, 90, 0.35);
-  --line-gap:          48px;
+  --color-line:      rgba(160, 130, 90, 0.38);
+  --line-gap:        44px;
 
-  --color-nav-bg:      rgba(244, 236, 216, 0.88);
-  --color-card-1:      #D4EDDB;
-  --color-card-2:      #F5DCCD;
-  --color-card-3:      #FBF0CC;
+  --color-nav-bg:    rgba(245, 237, 218, 0.90);
+  --color-about-bg:  #EDE2CC;
 
-  --color-about-bg:    #EDE0C8;
-  --color-tag-bg:      rgba(45, 27, 0, 0.08);
-  --color-tag-ink:     rgba(45, 27, 0, 0.55);
+  --color-card-1:    #D2EAD6;
+  --color-card-2:    #F5D9CC;
+  --color-card-3:    #FAF0CC;
 
-  --shadow-card:       0 2px 8px rgba(45,27,0,0.06), 0 16px 48px rgba(45,27,0,0.12);
-  --shadow-nav:        0 1px 0 var(--color-line);
-  --shadow-float:      0 8px 32px rgba(45,27,0,0.14), 0 2px 8px rgba(45,27,0,0.08);
+  --color-tag-bg:    rgba(45, 27, 0, 0.07);
+  --color-tag-ink:   rgba(45, 27, 0, 0.55);
+
+  --shadow-card:     0 2px 8px rgba(45,27,0,0.06), 0 12px 40px rgba(45,27,0,0.10);
+  --shadow-nav:      0 1px 0 var(--color-line);
+  --shadow-float:    0 6px 24px rgba(45,27,0,0.12), 0 2px 6px rgba(45,27,0,0.07);
 }
 
-/* ── Typography ── */
+/* ── Typography — 2 fonts only ── */
 :root {
-  --font-sans:         'DM Sans', system-ui, sans-serif;
-  --font-dm:           'DM Sans', system-ui, sans-serif;
-  --font-darker:       'Darker Grotesque', system-ui, sans-serif;
-  --font-syne:         'Syne', system-ui, sans-serif;
-  --font-serif:        'Instrument Serif', Georgia, serif;
+  --font-display:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
 
-  /* Fluid type scale */
-  --hero-hi:           clamp(2.5rem, 9vw, 10rem);
-  --hero-name:         clamp(3rem, 12vw, 13rem);
-  --hero-sub:          clamp(1rem, 2.2vw, 2.25rem);
-  --about-bio:         clamp(1.25rem, 2.2vw, 2.5rem);
+  /* — Legacy aliases so old component refs still resolve — */
+  --font-syne:    var(--font-display);
+  --font-darker:  var(--font-display);
+  --font-serif:   var(--font-display);
+  --font-dm:      var(--font-body);
+
+  /* — Missing colour aliases — */
+  --color-accent-2:    var(--color-accent);
+  --color-accent-mint: #4ADE80;
+
+  /* Fluid scale — measured, not massive */
+  --size-hero-name: clamp(3rem, 5.5vw, 5.5rem);
+  --size-hero-hi:   clamp(1.5rem, 2.8vw, 2.75rem);
+  --size-h1:        clamp(2.25rem, 4.5vw, 4.5rem);
+  --size-h2:        clamp(1.75rem, 3vw, 3rem);
+  --size-h3:        clamp(1.25rem, 1.8vw, 1.75rem);
 
   /* ── Spacing ── */
-  --space-1:  4px;  --space-2:  8px;  --space-3:  12px;
-  --space-4:  16px; --space-5:  20px; --space-6:  24px;
-  --space-8:  32px; --space-10: 40px; --space-12: 48px;
-  --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --space-4:  16px; --space-6:  24px; --space-8:  32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px;
+  --space-20: 80px; --space-24: 96px;
 
   /* ── Layout ── */
-  --navbar-height: 72px;
-  --navbar-px:     32px;
-  --nav-gap:       40px;
+  --navbar-height: 68px;
+  --navbar-px:     40px;
 
   /* ── Radii ── */
-  --radius-sm:   8px;
-  --radius-md:   16px;
-  --radius-lg:   24px;
-  --radius-xl:   32px;
+  --radius-sm:   8px;  --radius-md:  16px;
+  --radius-lg:   24px; --radius-xl:  32px;
   --radius-pill: 999px;
 
   /* ── Easing ── */
   --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast:    140ms;
-  --dur-base:    280ms;
-  --dur-slow:    520ms;
-
-  /* ── Cursor state ── */
-  --cursor-sparkle: 0; /* 0 = off, 1 = on */
+  --dur-fast: 140ms; --dur-base: 280ms; --dur-slow: 520ms;
 }

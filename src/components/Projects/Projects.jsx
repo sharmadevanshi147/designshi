@@ -1,7 +1,6 @@
-import { useRef, useContext } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import { ScrollContainerCtx } from '../PageFlipTransition/PageFlipTransition'
 import styles from './Projects.module.css'
 
 const PROJECTS = [
@@ -11,7 +10,7 @@ const PROJECTS = [
     title: 'Telemedpro',
     subtitle: 'Healthcare Platform to improve patient care',
     desc: 'A comprehensive telemedicine platform designed to connect patients with healthcare providers — reducing wait times and improving health outcomes through intuitive, empathy-first UX.',
-    color: '#C3F6FF',
+    color: '#C8F0F8',
     mockupBg: '#0d1f2d',
     mockupAccent: '#00bcd4',
     tags: ['Healthcare UX', 'Telemedicine', '2024'],
@@ -23,7 +22,7 @@ const PROJECTS = [
     title: 'MedSync',
     subtitle: 'Appointment scheduling & clinic management',
     desc: 'Streamlined booking and patient management for multi-specialty clinics, reducing no-shows by 40% through smart reminders, waitlist intelligence, and an intuitive scheduling flow.',
-    color: '#FFE4F3',
+    color: '#FADADF',
     mockupBg: '#1e0a14',
     mockupAccent: '#ea5db4',
     tags: ['Product Design', 'Healthcare', '2023'],
@@ -35,7 +34,7 @@ const PROJECTS = [
     title: 'HealthVault',
     subtitle: 'Personal health records & monitoring dashboard',
     desc: 'A patient-centred dashboard empowering individuals to own their health data, track vitals over time, and share records securely with their care providers in one place.',
-    color: '#FFF3C4',
+    color: '#F9F0C0',
     mockupBg: '#1c1400',
     mockupAccent: '#f59e0b',
     tags: ['Dashboard', 'Data UX', '2023'],
@@ -44,20 +43,18 @@ const PROJECTS = [
 ]
 
 function ProjectCard({ project, index }) {
-  const containerRef = useContext(ScrollContainerCtx)
-  const wrapRef      = useRef(null)
+  const wrapRef    = useRef(null)
   const shouldReduce = useReducedMotion()
 
+  /* Scale only — no opacity, cards always fully visible */
   const { scrollYProgress } = useScroll({
-    container: containerRef,
-    target:    wrapRef,
-    offset:    ['center end', 'end start'],
+    target: wrapRef,
+    offset: ['center end', 'end start'],
   })
 
-  const scale   = useTransform(scrollYProgress, [0, 1], [1, 0.93])
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.6])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94])
 
-  const stickyTop = `calc(var(--navbar-height) + ${28 + index * 32}px)`
+  const stickyTop = `calc(var(--navbar-height) + ${24 + index * 28}px)`
 
   return (
     <div
@@ -69,8 +66,7 @@ function ProjectCard({ project, index }) {
         className={styles.card}
         style={{
           backgroundColor: project.color,
-          scale:   shouldReduce ? 1 : scale,
-          opacity: shouldReduce ? 1 : opacity,
+          scale: shouldReduce ? 1 : scale,
         }}
         aria-label={`Project: ${project.title}`}
       >
@@ -133,10 +129,10 @@ export default function Projects() {
     <section className={styles.projects} id="projects" aria-label="Projects">
 
       <div className={styles.header}>
-        <p className={styles.eyebrow}>Judge a book by its cover in the</p>
-        <h2 className={styles.heading}>Library of Projects</h2>
+        <p className={styles.eyebrow}>Selected work</p>
+        <h2 className={styles.heading}>Projects</h2>
         <p className={styles.subheading}>
-          Flip any project, read about it, and explore the full case study.
+          Healthcare experiences designed with empathy and rigour.
         </p>
       </div>
 
@@ -144,7 +140,6 @@ export default function Projects() {
         {PROJECTS.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} />
         ))}
-        <div className={styles.stackEnd} aria-hidden="true" />
       </div>
 
     </section>

@@ -1,9 +1,14 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 
 const CursorCtx = createContext(null)
 
 export function CursorProvider({ children }) {
-  const [mode, setMode] = useState('default') // 'default' | 'pencil'
+  const [mode, setMode] = useState('pencil') // pencil on by default
+
+  /* Set body attribute on mount so cursor hides immediately */
+  useEffect(() => {
+    document.body.setAttribute('data-cursor', 'pencil')
+  }, [])
 
   const toggleCursor = useCallback(() => {
     setMode(m => {

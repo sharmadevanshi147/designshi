@@ -19,7 +19,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-ink-70);
@@ -49,24 +49,24 @@
 }
 
 .heroPill {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(21,21,22,0.55);
+  color: var(--color-ink-50);
   background: rgba(21,21,22,0.08);
   padding: 5px 12px;
   border-radius: 999px;
 }
 
 .heroTitle {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  color: #151516;
+  color: var(--color-ink);
   margin-bottom: 20px;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .metaLabel {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -104,10 +104,10 @@
 }
 
 .metaValue {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 0.9375rem;
   font-weight: 700;
-  color: #151516;
+  color: var(--color-ink);
 }
 
 .accentBar {
@@ -127,7 +127,7 @@
 }
 
 .sectionLabel {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -168,7 +168,7 @@
 }
 
 .problemText {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.8;
   color: var(--color-ink-70);
@@ -189,7 +189,7 @@
 }
 
 .processNum {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -197,7 +197,7 @@
 }
 
 .processPhase {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 700;
   color: var(--color-ink);
@@ -205,7 +205,7 @@
 }
 
 .processDesc {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   line-height: 1.7;
   color: var(--color-ink-70);
@@ -232,14 +232,14 @@
 .screenEmoji { font-size: 2rem; }
 
 .screenLabel {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 0.875rem;
   font-weight: 700;
-  color: rgba(21,21,22,0.55);
+  color: var(--color-ink-50);
 }
 
 .screenNote {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: rgba(21,21,22,0.3);
   font-style: italic;
@@ -265,7 +265,7 @@
 }
 
 .outMetric {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -273,7 +273,7 @@
 }
 
 .outLabel {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: var(--color-ink-50);
 }
@@ -300,7 +300,7 @@
 }
 
 .navBack, .navContact {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-ink-70);

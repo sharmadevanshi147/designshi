@@ -1,76 +1,66 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100%;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--navbar-height) + 60px) 64px 80px;
-  overflow: hidden;
+  overflow-x: hidden;
+  padding-bottom: 64px;
 }
 
-/* ── Background deco ── */
+/* ── Blobs ── */
 .deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 
 .decoBlob1 {
   position: absolute;
-  width: 600px; height: 600px;
+  width: 500px; height: 500px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
-  opacity: 0.08;
-  top: -100px; right: -150px;
+  opacity: 0.06;
+  top: -80px; right: -120px;
   filter: blur(60px);
-  animation: float 8s ease-in-out infinite;
+  animation: float 9s ease-in-out infinite;
 }
 
 .decoBlob2 {
   position: absolute;
-  width: 400px; height: 400px;
+  width: 360px; height: 360px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--color-accent-2) 0%, transparent 70%);
-  opacity: 0.07;
-  bottom: -50px; left: -80px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  opacity: 0.04;
+  bottom: -40px; left: -60px;
   filter: blur(50px);
-  animation: float 10s ease-in-out infinite reverse;
+  animation: float 11s ease-in-out infinite reverse;
 }
 
-.decoGrid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--color-ink-10) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-ink-10) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
-  opacity: 0.4;
-}
-
-/* ── Content ── */
-.content {
+/* ── Top content: eyebrow + greeting ── */
+.topContent {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0;
-  max-width: 1000px;
+  padding: calc(var(--navbar-height) + 40px) 64px 0;
+  width: 100%;
+  max-width: 900px;
 }
 
-/* Eyebrow */
+/* Eyebrow pill */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-ink-50);
-  margin-bottom: 28px;
-  padding: 7px 16px;
+  margin-bottom: 24px;
+  padding: 7px 18px;
   border: 1px solid var(--color-ink-10);
   border-radius: var(--radius-pill);
   background: var(--color-surface);
@@ -82,59 +72,72 @@
   background: var(--color-accent-mint);
   flex-shrink: 0;
   animation: pulse-ring 2s ease infinite;
-  box-shadow: 0 0 0 0 var(--color-accent-mint);
 }
 
-/* Name block */
-.nameBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
+/* "Hi, I'm" */
 .greeting {
-  font-family: var(--font-dm);
-  font-size: var(--hero-hi);
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
   font-weight: 300;
-  line-height: 1;
   color: var(--color-ink-50);
-  margin-bottom: -0.08em;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
 }
 
-.nameWrap {
-  perspective: 800px;
-  line-height: 0.95;
+/* ── NAME RIBBON — full-width, edge to edge ── */
+.nameRibbon {
+  position: relative;
+  z-index: 2;
+  width: 100%;          /* 100% of hero (avoids scrollbar overhang of 100vw) */
+  overflow: hidden;
+  padding: 2px 0 8px;
+  border-top: 1px solid var(--color-ink-10);
+  border-bottom: 1px solid var(--color-ink-10);
+  margin: 4px 0 8px;
+  text-align: center;   /* center inline/inline-block children */
 }
 
 .name {
-  display: block;
-  font-family: var(--font-syne);
-  font-size: var(--hero-name);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none;
+  display: inline-block; /* inline-block respects text-align: center of parent */
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(72px, 16vw, 210px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-/* Tagline */
+/* ── Bottom content: tagline + CTAs + note ── */
+.bottomContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 64px;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 16px;
+}
+
+/* Rotating tagline */
 .taglineWrap {
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
   overflow: hidden;
 }
 
 .tagline {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   color: var(--color-ink-70);
   text-align: center;
 }
@@ -143,8 +146,8 @@
 .ctas {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
+  gap: 14px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -153,56 +156,42 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 32px;
+  padding: 13px 30px;
   border-radius: var(--radius-pill);
   background: var(--color-ink);
   color: var(--color-bg);
-  font-family: var(--font-dm);
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
   font-weight: 600;
   transition: opacity 0.2s, transform 0.2s, gap 0.2s;
 }
-
-.ctaPrimary:hover {
-  opacity: 0.82;
-  transform: translateY(-2px);
-  gap: 14px;
-}
+.ctaPrimary:hover { opacity: 0.82; transform: translateY(-2px); gap: 14px; }
 
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
-  padding: 14px 32px;
+  padding: 13px 30px;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--color-ink-30);
   color: var(--color-ink);
-  font-family: var(--font-dm);
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
   font-weight: 500;
   transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
+.ctaSecondary:hover { border-color: var(--color-ink); background: var(--color-ink-10); transform: translateY(-2px); }
 
-.ctaSecondary:hover {
-  border-color: var(--color-ink);
-  background: var(--color-ink-10);
-  transform: translateY(-2px);
-}
-
-/* Personality note */
+/* Note */
 .note {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   line-height: 1.7;
   color: var(--color-ink-50);
   text-align: center;
 }
+.note em { font-style: normal; color: var(--color-accent); }
 
-.note em {
-  font-style: italic;
-  color: var(--color-accent);
-}
-
-/* ── Socials sidebar ── */
+/* ── Social sidebar ── */
 .socials {
   position: absolute;
   right: 40px;
@@ -225,18 +214,12 @@
   color: var(--color-ink-70);
   transition: background 0.18s, color 0.18s, transform 0.18s;
 }
-
-.socialLink:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: transparent;
-  transform: scale(1.1);
-}
+.socialLink:hover { background: var(--color-accent); color: #fff; border-color: transparent; transform: scale(1.1); }
 
 /* ── Scroll cue ── */
 .scrollCue {
   position: absolute;
-  bottom: 28px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -246,7 +229,7 @@
 }
 
 .scrollText {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -256,7 +239,7 @@
 
 .scrollLine {
   width: 1px;
-  height: 40px;
+  height: 36px;
   background: linear-gradient(to bottom, var(--color-ink-30), transparent);
   animation: scroll-line 2s ease-in-out infinite;
 }
@@ -268,11 +251,13 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .hero { padding: calc(var(--navbar-height) + 48px) 48px 64px; }
+  .topContent, .bottomContent { padding-left: 48px; padding-right: 48px; }
   .socials { display: none; }
 }
 
 @media (max-width: 640px) {
-  .hero { padding: calc(var(--navbar-height) + 32px) 24px 48px; }
+  .topContent { padding-left: 24px; padding-right: 24px; }
+  .bottomContent { padding-left: 24px; padding-right: 24px; }
+  .name { font-size: clamp(60px, 18vw, 100px); }
   .decoBlob1, .decoBlob2 { display: none; }
 }

@@ -89,6 +89,17 @@ export default function About() {
                 </svg>
                 View LinkedIn
               </a>
+              <a
+                href="/resume.pdf"
+                download="Devanshi_Sharma_Resume.pdf"
+                className={styles.btnDownload}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+                  <path d="M12 15V3"/><path d="M7 10l5 5 5-5"/><path d="M3 19h18"/>
+                </svg>
+                Download CV
+              </a>
               <a href="mailto:devanshisharma3574@gmail.com" className={styles.btnSecondary}>
                 Get in touch →
               </a>

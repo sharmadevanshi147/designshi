@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 
-const THEMES = ['light', 'dark', 'sepia']
-const THEME_LABELS = { light: '☀️', dark: '🌙', sepia: '📜' }
+const THEMES = ['light', 'dark']
+const THEME_LABELS = { light: '☀️', dark: '🌙' }
 const STORAGE_KEY = 'portfolio-theme'
 
 const ThemeCtx = createContext(null)

@@ -2,69 +2,68 @@ import { useRef, useState, useCallback } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import styles from './Photobook.module.css'
 
-/* Each page spread = array of photo slots (1–4 photos) */
+/* Personal life spreads — photos to be swapped in later */
 const SPREADS = [
   {
-    title: 'The Process',
-    caption: 'Where it all begins — sticky notes, sketches, late-night epiphanies.',
+    title: 'Golden Hours',
+    caption: 'Sunsets, slow evenings, and moments worth pausing for. The kind of light that makes you forget the time.',
     photos: [
-      { label: 'Sketching wireframes', color: '#C3F6FF', emoji: '✏️', ratio: '4/3' },
-      { label: 'Sticky note chaos', color: '#FFE4F3', emoji: '🗒️', ratio: '3/4' },
-      { label: 'Design review board', color: '#FFF3C4', emoji: '📋', ratio: '4/3' },
+      { label: 'Sunday evening', color: '#FFD6A5', emoji: '🌅', ratio: '4/3' },
+      { label: 'City glow', color: '#FFCBA4', emoji: '🌇', ratio: '3/4' },
+      { label: 'Rooftop quiet', color: '#FFE5CC', emoji: '🏙️', ratio: '4/3' },
     ],
   },
   {
-    title: 'The People',
-    caption: 'Every user interview, every "aha!" moment, every frustrated click that taught us something.',
+    title: 'Coffee & Quiet',
+    caption: 'Morning rituals, dog-eared books, and cups of chai that went cold while I was lost in thought.',
     photos: [
-      { label: 'User interview', color: '#D1FAE5', emoji: '🎙️', ratio: '3/4' },
-      { label: 'Co-design session', color: '#EDE9FE', emoji: '🤝', ratio: '4/3' },
+      { label: 'First cup', color: '#D4A97A', emoji: '☕', ratio: '3/4' },
+      { label: 'The stack of books', color: '#E8D5B7', emoji: '📚', ratio: '4/3' },
     ],
   },
   {
-    title: 'The Pixels',
-    caption: 'From rough to refined — the Figma files that made it to production.',
+    title: 'Wander',
+    caption: 'Places I\'ve been, streets I\'ve found, and the beautiful disorientation of being somewhere new.',
     photos: [
-      { label: 'Component library', color: '#FEE2E2', emoji: '🧩', ratio: '3/4' },
-      { label: 'Final UI screens', color: '#E0F2FE', emoji: '✨', ratio: '4/3' },
-      { label: 'Mobile prototype', color: '#FEF3C7', emoji: '📱', ratio: '3/4' },
+      { label: 'A new street', color: '#B5D5C5', emoji: '🗺️', ratio: '4/3' },
+      { label: 'Somewhere between', color: '#A8C5B5', emoji: '🚆', ratio: '3/4' },
+      { label: 'Found corner', color: '#C8DDD5', emoji: '🌿', ratio: '3/4' },
     ],
   },
   {
-    title: 'The Moments',
-    caption: 'Life between the deadlines — what keeps the design alive.',
+    title: 'Small Joys',
+    caption: 'Flowers from a street market. The perfect playlist. Rain on a window. The little things that make life feel full.',
     photos: [
-      { label: '4am coffee run', color: '#FCE7F3', emoji: '☕', ratio: '4/3' },
-      { label: 'Presentation day', color: '#ECFDF5', emoji: '🎤', ratio: '4/3' },
+      { label: 'Market flowers', color: '#FFB5C8', emoji: '🌸', ratio: '4/3' },
+      { label: 'Rain light', color: '#C5D8E8', emoji: '🌧️', ratio: '4/3' },
     ],
   },
 ]
 
 const BOOK_VARIANTS = {
   enter: (dir) => ({
-    x: dir > 0 ? '60%' : '-60%',
+    x: dir > 0 ? '55%' : '-55%',
     opacity: 0,
-    rotateY: dir > 0 ? 15 : -15,
-    scale: 0.92,
+    rotateY: dir > 0 ? 10 : -10,
+    scale: 0.94,
   }),
   center: {
     x: 0, opacity: 1, rotateY: 0, scale: 1,
     transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
   },
   exit: (dir) => ({
-    x: dir > 0 ? '-60%' : '60%',
+    x: dir > 0 ? '-55%' : '55%',
     opacity: 0,
-    rotateY: dir > 0 ? -15 : 15,
-    scale: 0.92,
-    transition: { duration: 0.45, ease: [0.4, 0, 1, 1] },
+    rotateY: dir > 0 ? -10 : 10,
+    scale: 0.94,
+    transition: { duration: 0.42, ease: [0.4, 0, 1, 1] },
   }),
 }
 
 export default function Photobook() {
   const [page, setPage] = useState(0)
-  const [dir, setDir] = useState(1)
+  const [dir, setDir]   = useState(1)
   const shouldReduce = useReducedMotion()
-  const containerRef = useRef(null)
 
   const go = useCallback((delta) => {
     setDir(delta)
@@ -74,21 +73,21 @@ export default function Photobook() {
   const spread = SPREADS[page]
 
   return (
-    <section className={styles.section} id="life" aria-label="Designing moments inspired by life">
+    <section className={styles.section} id="life" aria-label="Life photobook">
 
       {/* Header */}
       <div className={styles.header}>
         <p className={styles.eyebrow}>Designing moments inspired by</p>
         <h2 className={styles.heading}>Life</h2>
         <p className={styles.sub}>
-          A photobook of the process, the people, and the pixels — real stories behind the work.
+          A personal photobook — the world outside the Figma file.
         </p>
       </div>
 
-      {/* Book container */}
-      <div className={styles.book} ref={containerRef}>
+      {/* Book */}
+      <div className={styles.book}>
 
-        {/* Page indicator */}
+        {/* Page dots */}
         <div className={styles.pageIndicator} aria-label={`Page ${page + 1} of ${SPREADS.length}`}>
           {SPREADS.map((_, i) => (
             <button
@@ -112,11 +111,9 @@ export default function Photobook() {
               animate="center"
               exit="exit"
             >
-              {/* Book spine */}
+              {/* Spine */}
               <div className={styles.spine} aria-hidden="true">
-                <span className={styles.spineText}>
-                  {spread.title.toUpperCase()}
-                </span>
+                <span className={styles.spineText}>{spread.title.toUpperCase()}</span>
               </div>
 
               {/* Left page: caption */}
@@ -131,14 +128,15 @@ export default function Photobook() {
                   <h3 className={styles.spreadTitle}>{spread.title}</h3>
                   <p className={styles.spreadCaption}>{spread.caption}</p>
                   <p className={styles.photoNote}>
-                    ✦ Photos coming soon — these pages await your story.
+                    ✦ Real photos coming soon — these pages await their memories.
                   </p>
                 </div>
               </div>
 
-              {/* Right page: photos */}
+              {/* Right page: photo placeholders */}
               <div className={styles.rightPage}>
-                <div className={styles.photoGrid}
+                <div
+                  className={styles.photoGrid}
                   data-count={spread.photos.length}
                 >
                   {spread.photos.map((photo, i) => (
@@ -158,7 +156,7 @@ export default function Photobook() {
           </AnimatePresence>
         </div>
 
-        {/* Navigation arrows */}
+        {/* Nav arrows */}
         <div className={styles.nav}>
           <button
             className={styles.navBtn}
@@ -170,9 +168,7 @@ export default function Photobook() {
               <path d="M15 18l-6-6 6-6"/>
             </svg>
           </button>
-          <span className={styles.navLabel}>
-            {page + 1} / {SPREADS.length}
-          </span>
+          <span className={styles.navLabel}>{page + 1} / {SPREADS.length}</span>
           <button
             className={styles.navBtn}
             onClick={() => go(1)}

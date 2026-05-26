@@ -8,12 +8,13 @@
 .projects {
   width: 100%;
   background: transparent;
+  padding-bottom: 64px;
 }
 
 /* ── Section header ── */
 .header {
   text-align: center;
-  padding: 96px 60px 64px;
+  padding: 64px 60px 48px;
 }
 
 .eyebrow {
@@ -27,11 +28,12 @@
 }
 
 .heading {
-  font-family: var(--font-syne);
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
   color: var(--color-ink);
   margin-bottom: 18px;
 }
@@ -48,22 +50,23 @@
 /* ── Stack container ── */
 .stack {
   position: relative;
-  padding: 0 48px 0;
+  padding: 0 48px;
   max-width: 1280px;
   margin: 0 auto;
-  padding-bottom: calc(240vh + 100px);
+  /* padding-bottom holds the dwell time for the last card */
+  padding-bottom: 25vh;
 }
-
-.stackEnd { height: 60vh; }
 
 /* ── Sticky wrapper: position:sticky lives HERE, no transforms ── */
 .cardSticky {
   position: sticky;
-  height: calc(100vh - var(--navbar-height) - 64px);
-  max-height: 780px;
-  margin-bottom: 80vh;
+  height: calc(100vh - var(--navbar-height) - 40px);
+  max-height: 700px;
+  /* Each card dwells for 70vh before the next scrolls in */
+  margin-bottom: 70vh;
 }
 
+/* Last card dwells just long enough to feel intentional */
 .cardSticky:last-of-type { margin-bottom: 0; }
 
 /* ── Inner card: visual + transforms only, NO sticky ── */
