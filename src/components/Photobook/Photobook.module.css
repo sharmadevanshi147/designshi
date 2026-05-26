@@ -25,17 +25,17 @@
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-size: clamp(2.5rem, 5.5vw, 5.5rem);
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1.05;
   color: var(--color-ink);
   margin-bottom: 16px;
 }
 
 .sub {
   font-family: var(--font-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.125rem;
   color: var(--color-ink-50);
   max-width: 480px;
@@ -162,16 +162,17 @@
 .spreadTitle {
   font-family: var(--font-syne);
   font-size: clamp(1.75rem, 3vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1.1;
   color: var(--color-ink);
   margin-bottom: 20px;
 }
 
 .spreadCaption {
   font-family: var(--font-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 1rem;
   line-height: 1.75;
   color: var(--color-ink-70);

@@ -99,12 +99,12 @@
   display: inline-block;
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-style: italic;
-  font-weight: 800;
+  font-style: normal;
+  font-weight: 400;
   /* ~90 px at typical laptop viewport (1400 px → 6.5 vw = 91 px) */
   font-size: clamp(72px, 6.5vw, 108px);
   line-height: 0.9;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   color: var(--color-ink);
   white-space: nowrap;
   vertical-align: middle;
@@ -136,7 +136,7 @@
 
 .tagline {
   font-family: var(--font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   color: var(--color-ink-70);
   text-align: center;

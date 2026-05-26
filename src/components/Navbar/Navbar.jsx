@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
 import { useCursor } from '../../context/CursorContext'
-import { useFont } from '../../context/FontContext'
 import styles from './Navbar.module.css'
 
 const EXPO = [0.16, 1, 0.3, 1]
@@ -22,12 +21,10 @@ const THEME_ICONS = {
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled]       = useState(false)
-  const [fontOpen, setFontOpen]       = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const shouldReduce = useReducedMotion()
-  const { theme, cycleTheme }         = useTheme()
-  const { mode, toggleCursor }        = useCursor()
-  const { fontId, setFont, fonts }    = useFont()
+  const { theme, cycleTheme } = useTheme()
+  const { mode, toggleCursor } = useCursor()
   const location = useLocation()
   const isHome = location.pathname === '/'
 
@@ -36,16 +33,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  /* Close font dropdown on outside click */
-  useEffect(() => {
-    if (!fontOpen) return
-    const close = (e) => {
-      if (!e.target.closest('[data-fontpicker]')) setFontOpen(false)
-    }
-    document.addEventListener('mousedown', close)
-    return () => document.removeEventListener('mousedown', close)
-  }, [fontOpen])
 
   const handleNavClick = (e, href) => {
     if (!isHome || !href.startsWith('#')) return
@@ -66,7 +53,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className={styles.logo} aria-label="Devanshi Sharma — home">
           <span className={styles.logoMark}>
-            <em>D</em>S
+            DS
           </span>
           <span className={styles.logoDivider} aria-hidden="true" />
           <span className={styles.logoFull}>Devanshi</span>
@@ -109,52 +96,6 @@ export default function Navbar() {
 
         {/* Controls */}
         <div className={styles.controls}>
-
-          {/* Font picker */}
-          <div className={styles.fontPickerWrap} data-fontpicker>
-            <button
-              className={`${styles.iconBtn} ${fontOpen ? styles.active : ''}`}
-              onClick={() => setFontOpen(o => !o)}
-              aria-label="Change title font"
-              title="Title font"
-            >
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <polyline points="4 7 4 4 20 4 20 7"/>
-                <line x1="9" y1="20" x2="15" y2="20"/>
-                <line x1="12" y1="4" x2="12" y2="20"/>
-              </svg>
-            </button>
-
-            {fontOpen && (
-              <div className={styles.fontDropdown} role="listbox" aria-label="Title font options">
-                <p className={styles.fontDropdownLabel}>Title font</p>
-                {fonts.map(f => (
-                  <button
-                    key={f.id}
-                    role="option"
-                    aria-selected={fontId === f.id}
-                    className={`${styles.fontOption} ${fontId === f.id ? styles.fontOptionActive : ''}`}
-                    onClick={() => { setFont(f.id); setFontOpen(false) }}
-                  >
-                    <span
-                      className={styles.fontSample}
-                      style={{ fontFamily: f.value, fontStyle: 'italic' }}
-                    >
-                      Ag
-                    </span>
-                    <span className={styles.fontName}>{f.label}</span>
-                    {fontId === f.id && (
-                      <svg className={styles.fontCheck} width="14" height="14"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* Cursor toggle */}
           <button

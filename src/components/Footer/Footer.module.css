@@ -44,10 +44,10 @@
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-size: clamp(3rem, 9vw, 9rem);
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1.0;
   color: #fff;
   margin-bottom: 36px;
 }
