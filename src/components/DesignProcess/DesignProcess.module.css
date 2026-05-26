@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  padding: 64px 0 80px;
+  padding: 64px 0 64px;
   overflow: hidden;
 }
 
@@ -23,12 +23,13 @@
 
 .heading {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: clamp(2.5rem, 5.5vw, 5rem);
   font-weight: 700;
+  font-style: italic;
   letter-spacing: -0.03em;
   line-height: 0.95;
   color: var(--color-ink);
-  font-style: italic;
 }
 
 /* ── Wavy process layout ── */

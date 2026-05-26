@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  padding: 64px 60px 80px;
+  padding: 64px 60px 64px;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -20,6 +20,7 @@
 
 .heading {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: clamp(2.5rem, 6vw, 5.5rem);
   font-weight: 700;
   font-style: italic;
@@ -233,7 +234,7 @@
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .extra { grid-template-columns: 1fr 1fr; }
-  .section { padding: 72px 40px 80px; }
+  .section { padding: 72px 40px 64px; }
 }
 
 @media (max-width: 768px) {

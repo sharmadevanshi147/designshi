@@ -3,9 +3,11 @@
   /* Always dark regardless of theme — uses dedicated footer tokens */
   background: var(--color-footer-bg, #111110);
   color: var(--color-footer-ink, #F0EDE6);
-  padding: 100px 60px 48px;
+  padding: 72px 60px 48px;
   position: relative;
   overflow: hidden;
+  /* Visible separation in dark mode where page bg is also very dark */
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 /* subtle grid deco */
@@ -40,6 +42,7 @@
 
 .ctaHeading {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: clamp(3rem, 9vw, 9rem);
   font-weight: 700;
   font-style: italic;
@@ -68,7 +71,9 @@
 
 .ctaBtn:hover {
   border-color: #fff;
-  color: var(--color-ink);
+  /* Hardcode dark text so it's readable on the white hover background
+     in both light AND dark mode (var(--color-ink) is near-white in dark) */
+  color: #111110;
   background: #fff;
 }
 
@@ -169,13 +174,13 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .footer { padding: 72px 40px 40px; }
+  .footer { padding: 64px 40px 40px; }
   .bottom { grid-template-columns: 1fr 1fr; }
   .note { display: none; }
 }
 
 @media (max-width: 640px) {
-  .footer { padding: 60px 24px 36px; }
+  .footer { padding: 56px 24px 36px; }
   .bottom { grid-template-columns: 1fr; gap: 24px; }
   .socials { align-items: flex-start; }
   .copyright { flex-direction: column; gap: 8px; text-align: center; }

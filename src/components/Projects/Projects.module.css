@@ -8,7 +8,7 @@
 .projects {
   width: 100%;
   background: transparent;
-  padding-bottom: 64px;
+  padding-bottom: 0;
 }
 
 /* ── Section header ── */
@@ -29,6 +29,7 @@
 
 .heading {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: clamp(2.5rem, 5.5vw, 5rem);
   font-weight: 700;
   font-style: italic;
@@ -53,8 +54,8 @@
   padding: 0 48px;
   max-width: 1280px;
   margin: 0 auto;
-  /* padding-bottom holds the dwell time for the last card */
-  padding-bottom: 25vh;
+  /* Clean exit after last card dwell */
+  padding-bottom: 64px;
 }
 
 /* ── Sticky wrapper: position:sticky lives HERE, no transforms ── */
@@ -62,12 +63,12 @@
   position: sticky;
   height: calc(100vh - var(--navbar-height) - 40px);
   max-height: 700px;
-  /* Each card dwells for 70vh before the next scrolls in */
-  margin-bottom: 70vh;
+  /* Each card dwells for 60vh before the next scrolls in */
+  margin-bottom: 60vh;
 }
 
-/* Last card dwells just long enough to feel intentional */
-.cardSticky:last-of-type { margin-bottom: 0; }
+/* Last card gets its own dwell (30vh) so it doesn't vanish abruptly */
+.cardSticky:last-of-type { margin-bottom: 30vh; }
 
 /* ── Inner card: visual + transforms only, NO sticky ── */
 .card {
