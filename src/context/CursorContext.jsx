@@ -3,11 +3,11 @@ import { createContext, useContext, useState, useCallback, useEffect } from 'rea
 const CursorCtx = createContext(null)
 
 export function CursorProvider({ children }) {
-  const [mode, setMode] = useState('pencil') // pencil on by default
+  const [mode, setMode] = useState('default') // normal cursor by default
 
-  /* Set body attribute on mount so cursor hides immediately */
+  /* Set body attribute on mount */
   useEffect(() => {
-    document.body.setAttribute('data-cursor', 'pencil')
+    document.body.setAttribute('data-cursor', 'default')
   }, [])
 
   const toggleCursor = useCallback(() => {

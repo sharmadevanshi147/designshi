@@ -155,7 +155,7 @@ export default function Hero() {
         </motion.p>
       </div>
 
-      {/* ── Social strip ── */}
+      {/* ── Social strip — fixed, always visible ── */}
       <motion.div
         className={styles.socials}
         initial={shouldReduce ? false : { opacity: 0, x: 20 }}
@@ -170,13 +170,6 @@ export default function Hero() {
               <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>,
           },
           {
-            label: 'Instagram', href: 'https://instagram.com',
-            icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <rect x="2" y="2" width="20" height="20" rx="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>,
-          },
-          {
             label: 'Email', href: 'mailto:devanshisharma3574@gmail.com',
             icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -188,18 +181,6 @@ export default function Hero() {
             {icon}
           </a>
         ))}
-      </motion.div>
-
-      {/* ── Scroll cue ── */}
-      <motion.div
-        className={styles.scrollCue}
-        initial={shouldReduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.4, duration: 0.6 }}
-        aria-hidden="true"
-      >
-        <span className={styles.scrollText}>scroll</span>
-        <div className={styles.scrollLine} />
       </motion.div>
 
     </section>

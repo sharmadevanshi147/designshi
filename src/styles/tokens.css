@@ -110,6 +110,7 @@
 :root {
   --font-display:  'Bodoni Moda', Georgia, 'Times New Roman', serif;
   --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-plex:     'IBM Plex Sans', 'DM Sans', system-ui, sans-serif;
 
   /* — Legacy aliases so old component refs still resolve — */
   --font-syne:    var(--font-display);

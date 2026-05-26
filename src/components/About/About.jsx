@@ -6,16 +6,11 @@ import styles from './About.module.css'
 const EXPO = [0.16, 1, 0.3, 1]
 
 const SKILLS = [
+  'AI based UX development', 'AI Experimentation',
+  'Rapid Prototyping', 'Low Fidelity Designs',
   'User Research', 'Design Systems', 'Heuristic Audits',
-  'Wireframing', 'Prototyping', 'HTML · CSS · JS',
+  'Wireframing', 'HTML · CSS · JS',
   'Figma', 'Information Architecture', 'Usability Testing',
-]
-
-const STATS = [
-  { value: '2+',   label: 'Years designing' },
-  { value: '100+', label: 'Interfaces shipped' },
-  { value: '20+',  label: 'Research sessions' },
-  { value: '50+',  label: 'Usability issues found' },
 ]
 
 export default function About() {
@@ -52,13 +47,15 @@ export default function About() {
         >
           {/* Left: bio */}
           <div className={styles.left}>
-            <motion.p className={styles.label} variants={fadeUp}>About me</motion.p>
+            <motion.h2 className={styles.sectionHeading} variants={fadeUp}>
+              About me
+            </motion.h2>
 
-            <motion.h2 className={styles.bio} variants={fadeUp}>
+            <motion.p className={styles.bio} variants={fadeUp}>
               I design complex healthcare experiences that feel{' '}
               <em>human</em> — thinking about everything a user feels{' '}
               <em>because</em> of the product, not just while using it.
-            </motion.h2>
+            </motion.p>
 
             <motion.p className={styles.bodyCopy} variants={fadeUp}>
               2+ years deep in healthcare UX, startups, and freelance. Currently{' '}
@@ -66,29 +63,7 @@ export default function About() {
               I mentor peers, ship fast, and obsess over details at 4am.
             </motion.p>
 
-            {/* Stats */}
-            <motion.div className={styles.stats} variants={fadeUp}>
-              {STATS.map(({ value, label }) => (
-                <div key={label} className={styles.stat}>
-                  <span className={styles.statValue}>{value}</span>
-                  <span className={styles.statLabel}>{label}</span>
-                </div>
-              ))}
-            </motion.div>
-
             <motion.div className={styles.actions} variants={pop}>
-              <a
-                href="https://linkedin.com/in/devanshi-sharma-746470213"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnPrimary}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-                </svg>
-                View LinkedIn
-              </a>
               <a
                 href="/resume.pdf"
                 download="Devanshi_Sharma_Resume.pdf"
@@ -99,9 +74,6 @@ export default function About() {
                   <path d="M12 15V3"/><path d="M7 10l5 5 5-5"/><path d="M3 19h18"/>
                 </svg>
                 Download CV
-              </a>
-              <a href="mailto:devanshisharma3574@gmail.com" className={styles.btnSecondary}>
-                Get in touch →
               </a>
             </motion.div>
           </div>
@@ -121,13 +93,6 @@ export default function About() {
                   {s}
                 </motion.span>
               ))}
-            </motion.div>
-
-            <motion.div className={styles.toolsNote} variants={fadeUp}>
-              <span className={styles.toolsLabel}>Tools I love</span>
-              <p className={styles.toolsList}>
-                Figma · FigJam · Claude · Miro · Notion · VS Code · GitHub
-              </p>
             </motion.div>
           </div>
         </motion.div>

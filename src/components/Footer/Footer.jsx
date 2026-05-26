@@ -40,7 +40,6 @@ export default function Footer() {
         <div className={styles.socials}>
           {[
             { label: 'LinkedIn', href: 'https://linkedin.com/in/devanshi-sharma-746470213', icon: 'in' },
-            { label: 'Instagram', href: 'https://instagram.com', icon: '✦' },
             { label: '+91 7838997914', href: 'tel:+917838997914', icon: '☎' },
           ].map(({ label, href, icon }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer"
