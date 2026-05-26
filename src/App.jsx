@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider }  from './context/ThemeContext'
 import { CursorProvider } from './context/CursorContext'
+import { FontProvider }   from './context/FontContext'
 import Cursor        from './components/Cursor/Cursor'
 import Navbar        from './components/Navbar/Navbar'
 import Hero          from './components/Hero/Hero'
@@ -33,6 +34,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
+        <FontProvider>
         <CursorProvider>
           <Cursor />
           <Routes>
@@ -41,6 +43,7 @@ export default function App() {
             <Route path="*"               element={<HomePage />} />
           </Routes>
         </CursorProvider>
+        </FontProvider>
       </ThemeProvider>
     </BrowserRouter>
   )

@@ -177,6 +177,91 @@
   transform: translateY(-1px);
 }
 
+/* ── Font picker ── */
+.fontPickerWrap {
+  position: relative;
+}
+
+.fontDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 188px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink-10);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  padding: 8px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fontDropdownLabel {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-30);
+  padding: 4px 8px 8px;
+  border-bottom: 1px solid var(--color-ink-10);
+  margin-bottom: 4px;
+}
+
+.fontOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink-70);
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+}
+
+.fontOption:hover {
+  background: var(--color-ink-10);
+  color: var(--color-ink);
+}
+
+.fontOptionActive {
+  background: var(--color-accent-lt);
+  color: var(--color-accent);
+}
+
+.fontOptionActive:hover {
+  background: var(--color-accent-lt);
+  color: var(--color-accent);
+}
+
+.fontSample {
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1;
+  width: 28px;
+  flex-shrink: 0;
+  color: var(--color-ink);
+}
+
+.fontOptionActive .fontSample {
+  color: var(--color-accent);
+}
+
+.fontName {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.fontCheck {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
 @media (max-width: 900px) {
   .links li:not(:last-child) { display: none; }
 }
