@@ -77,8 +77,7 @@ export default function Photobook() {
 
       {/* Header */}
       <div className={styles.header}>
-        <p className={styles.eyebrow}>Designing moments inspired by</p>
-        <h2 className={styles.heading}>Life</h2>
+        <h2 className={styles.heading}>Designing moments inspired by life</h2>
         <p className={styles.sub}>
           A personal photobook — the world outside the Figma file.
         </p>

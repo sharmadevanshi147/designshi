@@ -24,11 +24,11 @@
 .heading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
   font-weight: 700;
   font-style: italic;
   letter-spacing: -0.03em;
-  line-height: 0.95;
+  line-height: 1.0;
   color: var(--color-ink);
   margin-bottom: 16px;
 }
