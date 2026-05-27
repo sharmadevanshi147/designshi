@@ -31,7 +31,7 @@ function HomePage() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/designshi">
       <ThemeProvider>
         <CursorProvider>
           <Cursor />
