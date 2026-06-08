@@ -29,12 +29,13 @@
 }
 
 .contactEyebrow {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 12px;
+  font-family: var(--font-plex);
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  max-width: 540px;
+  margin: 0 auto 28px;
 }
 
 .contactHeading {
@@ -47,6 +48,13 @@
   line-height: 1.0;
   color: #fff;
   margin-bottom: 40px;
+  cursor: default;
+  user-select: none;
+}
+
+.nameLetter {
+  display: inline-block;
+  transition: color 0.2s;
 }
 
 /* ── Copy rows ── */
