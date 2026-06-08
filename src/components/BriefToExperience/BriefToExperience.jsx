@@ -254,25 +254,30 @@ function MonitorMockup() {
 export default function BriefToExperience() {
   const shouldReduce = useReducedMotion()
   const sectionRef   = useRef(null)
+  const timersRef    = useRef([])
   const [phase, setPhase] = useState('idle')
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setPhase('sketch') },
-      { threshold: 0.2 }
-    )
-    if (sectionRef.current) obs.observe(sectionRef.current)
-    return () => obs.disconnect()
-  }, [])
+    const obs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return
+      obs.disconnect() // fire once only
 
-  useEffect(() => {
-    if (phase !== 'sketch') return
-    /* after sketch draws in, transition to monitor */
-    const t1 = setTimeout(() => setPhase('flip'),    2200)
-    const t2 = setTimeout(() => setPhase('monitor'), 2900)
-    const t3 = setTimeout(() => setPhase('reveal'),  4200)
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
-  }, [phase])
+      /* Set the entire timeline up-front.
+         Never depends on phase, so cleanup never cancels mid-run. */
+      setPhase('sketch')
+      timersRef.current = [
+        setTimeout(() => setPhase('flip'),    2200),
+        setTimeout(() => setPhase('monitor'), 2900),
+        setTimeout(() => setPhase('reveal'),  4400),
+      ]
+    }, { threshold: 0.15 })
+
+    if (sectionRef.current) obs.observe(sectionRef.current)
+    return () => {
+      obs.disconnect()
+      timersRef.current.forEach(clearTimeout)
+    }
+  }, []) // runs once — no phase dependency
 
   return (
     <section ref={sectionRef} className={styles.section} aria-label="Turning briefs to experiences">
