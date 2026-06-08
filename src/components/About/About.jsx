@@ -6,11 +6,14 @@ import styles from './About.module.css'
 const EXPO = [0.16, 1, 0.3, 1]
 
 const SKILLS = [
-  'AI based UX development', 'AI Experimentation',
+  'AI Based UX Development', 'AI Experimentation',
   'Rapid Prototyping', 'Low Fidelity Designs',
   'User Research', 'Design Systems', 'Heuristic Audits',
-  'Wireframing', 'HTML · CSS · JS',
-  'Figma', 'Information Architecture', 'Usability Testing',
+  'Wireframing', 'User Flow Creation & Analysis',
+  'High Fidelity Design', 'Problem Solving',
+  'VBC Centric Workflows', 'DPC Centric Workflows',
+  'HTML · CSS · JS', 'Figma',
+  'Information Architecture', 'Usability Testing', 'Claude Code',
 ]
 
 export default function About() {
@@ -52,15 +55,17 @@ export default function About() {
             </motion.h2>
 
             <motion.p className={styles.bio} variants={fadeUp}>
-              I design complex healthcare experiences that feel{' '}
-              <em>human</em> — thinking about everything a user feels{' '}
-              <em>because</em> of the product, not just while using it.
+              I design complex healthcare experiences that feel <em>human</em> — thinking about
+              everything a user feels <em>because</em> of the product, not just while using it.
+              My process starts with analysing the problem statement, visualising the persona
+              working on the workflow and creating each detail keeping each step of the actual
+              user in mind.
             </motion.p>
 
             <motion.p className={styles.bodyCopy} variants={fadeUp}>
               2+ years deep in healthcare UX, startups, and freelance. Currently{' '}
-              <strong>expanding design systems</strong> and running heuristic audits at Fold Health.
-              I mentor peers, ship fast, and obsess over details at 4am.
+              <strong>expanding design systems</strong>, creating outcomes oriented healthcare
+              workflows and running heuristic audits at Fold Health.
             </motion.p>
 
             <motion.div className={styles.actions} variants={pop}>
@@ -73,7 +78,7 @@ export default function About() {
                   stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
                   <path d="M12 15V3"/><path d="M7 10l5 5 5-5"/><path d="M3 19h18"/>
                 </svg>
-                Download CV
+                Download Resume
               </a>
             </motion.div>
           </div>

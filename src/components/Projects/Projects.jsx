@@ -13,7 +13,7 @@ const PROJECTS = [
     color: '#C8F0F8',
     mockupBg: '#0d1f2d',
     mockupAccent: '#00bcd4',
-    tags: ['Healthcare UX', 'Telemedicine', '2024'],
+    tags: ['Healthcare Ux', 'Telemedicine', '2024'],
     year: '2024',
   },
   {
@@ -129,10 +129,10 @@ export default function Projects() {
     <section className={styles.projects} id="projects" aria-label="Projects">
 
       <div className={styles.header}>
-        <p className={styles.eyebrow}>Selected work</p>
-        <h2 className={styles.heading}>Projects</h2>
+        <p className={styles.eyebrow}>Selected Work</p>
+        <h2 className={styles.heading}>Library of Projects</h2>
         <p className={styles.subheading}>
-          Healthcare experiences designed with empathy and rigour.
+          User Centric Experiences, AI Based Workflows and more in the library.
         </p>
       </div>
 

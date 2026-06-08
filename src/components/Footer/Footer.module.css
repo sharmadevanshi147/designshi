@@ -1,12 +1,10 @@
 .footer {
   width: 100%;
-  /* Always dark regardless of theme — uses dedicated footer tokens */
   background: var(--color-footer-bg, #111110);
   color: var(--color-footer-ink, #F0EDE6);
   padding: 72px 60px 48px;
   position: relative;
   overflow: hidden;
-  /* Visible separation in dark mode where page bg is also very dark */
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
@@ -16,65 +14,97 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
 }
 
-/* ── CTA ── */
-.cta {
+/* ── Contact block ── */
+.contact {
   text-align: center;
   position: relative;
   z-index: 1;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
 }
 
-.ctaEyebrow {
-  font-family: var(--font-dm);
+.contactEyebrow {
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: rgba(255,255,255,0.4);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.ctaHeading {
+.contactHeading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(3rem, 9vw, 9rem);
+  font-size: clamp(3rem, 9vw, 8rem);
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;
   line-height: 1.0;
   color: #fff;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
-.ctaAccent {
-  color: var(--color-accent);
-  -webkit-text-fill-color: var(--color-accent);
+/* ── Copy rows ── */
+.contactItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-.ctaBtn {
-  display: inline-block;
-  padding: 16px 40px;
-  border: 1.5px solid rgba(255,255,255,0.25);
+.copyRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: var(--radius-pill);
-  font-family: var(--font-dm);
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.7);
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  padding: 10px 20px;
+  transition: background 0.18s;
 }
 
-.ctaBtn:hover {
-  border-color: #fff;
-  /* Hardcode dark text so it's readable on the white hover background
-     in both light AND dark mode (var(--color-ink) is near-white in dark) */
-  color: #111110;
-  background: #fff;
+.copyRow:hover { background: rgba(255,255,255,0.10); }
+
+.copyIcon {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+}
+
+.copyValue {
+  font-family: var(--font-plex);
+  font-size: 0.9375rem;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.01em;
+}
+
+.copyBtn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+}
+
+.copyBtn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Copied state — green circle + white tick */
+.copyDone {
+  background: #22c55e !important;
+  color: #fff !important;
+  transform: scale(1.1);
 }
 
 /* ── Divider ── */
@@ -82,6 +112,8 @@
   height: 1px;
   background: rgba(255,255,255,0.08);
   margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Bottom ── */
@@ -98,22 +130,21 @@
 .brand { display: flex; flex-direction: column; gap: 6px; }
 
 .brandName {
-  font-family: var(--font-syne);
+  font-family: var(--font-display);
   font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: 0;
   color: #fff;
 }
 
 .brandSub {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: rgba(255,255,255,0.4);
 }
 
 .note {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-plex);
   font-size: 0.875rem;
   color: rgba(255,255,255,0.35);
   text-align: center;
@@ -134,7 +165,7 @@
   align-items: center;
   gap: 8px;
   color: rgba(255,255,255,0.5);
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   transition: color 0.18s;
 }
@@ -165,7 +196,7 @@
 }
 
 .copyright p {
-  font-family: var(--font-dm);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: rgba(255,255,255,0.3);
 }
@@ -184,4 +215,5 @@
   .bottom { grid-template-columns: 1fr; gap: 24px; }
   .socials { align-items: flex-start; }
   .copyright { flex-direction: column; gap: 8px; text-align: center; }
+  .copyValue { font-size: 0.8125rem; }
 }
