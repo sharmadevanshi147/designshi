@@ -8,8 +8,10 @@ import About         from './components/About/About'
 import Projects      from './components/Projects/Projects'
 import Photobook     from './components/Photobook/Photobook'
 import DesignProcess from './components/DesignProcess/DesignProcess'
-import Experience    from './components/Experience/Experience'
-import Footer        from './components/Footer/Footer'
+import { lazy, Suspense }  from 'react'
+import Experience          from './components/Experience/Experience'
+import Footer              from './components/Footer/Footer'
+const BriefToExperience = lazy(() => import('./components/BriefToExperience/BriefToExperience'))
 import ProjectPage   from './pages/ProjectPage/ProjectPage'
 
 function HomePage() {
@@ -23,6 +25,9 @@ function HomePage() {
         <Photobook />
         <DesignProcess />
         <Experience />
+        <Suspense fallback={null}>
+          <BriefToExperience />
+        </Suspense>
         <Footer />
       </main>
     </>

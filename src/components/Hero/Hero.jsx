@@ -1,33 +1,69 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import styles from './Hero.module.css'
 
 const EXPO = [0.16, 1, 0.3, 1]
 
-const TAGLINES = [
-  'Healthcare UX, done with heart',
-  'Turning complexity into clarity',
-  'Research → Wireframe → Ship',
-  'Obsessing over details, beautifully',
-  'Figma is my love language',
+/* ── Marquee taglines ── */
+const MARQUEE_ITEMS = [
+  'AI First Product/UX Designer',
+  'Turning Creative & Visual Thinking into User Scenarios',
+  '2 Years in Healthcare UX',
+  'Shipping in Code',
+  'Experience with Different Industries',
 ]
+
+/* ── Polaroid photos (replace src with real photos) ── */
+const POLAROIDS = [
+  { src: null, label: 'Photo 1', rotate: -12, x: -38, y: -18 },
+  { src: null, label: 'Photo 2', rotate:  8,  x:  32, y: -28 },
+  { src: null, label: 'Photo 3', rotate: -5,  x: -52, y:  22 },
+  { src: null, label: 'Photo 4', rotate: 14,  x:  44, y:  26 },
+]
+
+/* ── Polaroid component ── */
+function Polaroid({ photo, index, shouldReduce }) {
+  return (
+    <motion.div
+      className={styles.polaroid}
+      style={{ '--rotate': `${photo.rotate}deg` }}
+      initial={shouldReduce ? false : { x: 0, y: 0, opacity: 0, scale: 0.6, rotate: 0 }}
+      animate={{
+        x: `${photo.x}vw`,
+        y: `${photo.y}vh`,
+        opacity: 1,
+        scale: 1,
+        rotate: photo.rotate,
+      }}
+      transition={{
+        delay: 0.3 + index * 0.12,
+        duration: 0.9,
+        ease: EXPO,
+      }}
+      whileHover={{ scale: 1.08, zIndex: 10, rotate: photo.rotate * 0.4 }}
+    >
+      <div className={styles.polaroidPhoto}>
+        {photo.src
+          ? <img src={photo.src} alt={photo.label} />
+          : <div className={styles.polaroidPlaceholder} />
+        }
+      </div>
+      <p className={styles.polaroidLabel}>{photo.label}</p>
+    </motion.div>
+  )
+}
 
 export default function Hero() {
   const shouldReduce = useReducedMotion()
   const [morphed, setMorphed] = useState(false)
-  const [tagIdx, setTagIdx]   = useState(0)
 
-  /* Morph Devanshi → Designshi at 2.4 s — Apple hello blur */
+  /* Devanshi → Designshi at 2.4 s, back to Devanshi at 5.4 s */
   useEffect(() => {
     if (shouldReduce) return
-    const t = setTimeout(() => setMorphed(true), 2400)
-    return () => clearTimeout(t)
+    const t1 = setTimeout(() => setMorphed(true),  2400)
+    const t2 = setTimeout(() => setMorphed(false), 5400)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [shouldReduce])
-
-  useEffect(() => {
-    const t = setInterval(() => setTagIdx(i => (i + 1) % TAGLINES.length), 3500)
-    return () => clearInterval(t)
-  }, [])
 
   return (
     <section className={styles.hero} id="home" aria-label="Introduction">
@@ -38,18 +74,15 @@ export default function Hero() {
         <div className={styles.decoBlob2} />
       </div>
 
-      {/* ── Top: eyebrow + greeting ── */}
-      <div className={styles.topContent}>
-        <motion.div
-          className={styles.eyebrow}
-          initial={shouldReduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.7, ease: EXPO }}
-        >
-          <span className={styles.eyebrowDot} />
-          Product Designer · Healthcare UX · Fold Health
-        </motion.div>
+      {/* ── Polaroids spreading from centre ── */}
+      <div className={styles.polaroidStage} aria-hidden="true">
+        {POLAROIDS.map((photo, i) => (
+          <Polaroid key={i} photo={photo} index={i} shouldReduce={shouldReduce} />
+        ))}
+      </div>
 
+      {/* ── Greeting ── */}
+      <div className={styles.topContent}>
         <motion.span
           className={styles.greeting}
           initial={shouldReduce ? false : { opacity: 0, y: 12 }}
@@ -60,7 +93,7 @@ export default function Hero() {
         </motion.span>
       </div>
 
-      {/* ── Full-width name ribbon ── */}
+      {/* ── Full-width name ── */}
       <motion.div
         className={styles.nameRibbon}
         initial={shouldReduce ? false : { opacity: 0, filter: 'blur(32px)', scale: 0.97 }}
@@ -96,28 +129,26 @@ export default function Hero() {
         </span>
       </motion.div>
 
-      {/* ── Bottom: tagline + CTAs + note ── */}
-      <div className={styles.bottomContent}>
-        <motion.div
-          className={styles.taglineWrap}
-          initial={shouldReduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.6 }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={tagIdx}
-              className={styles.tagline}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.35, ease: EXPO }}
-            >
-              {TAGLINES[tagIdx]}
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
+      {/* ── Marquee tagline ── */}
+      <motion.div
+        className={styles.marqueeWrap}
+        initial={shouldReduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.7 }}
+        aria-hidden="true"
+      >
+        <div className={styles.marqueeTrack}>
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i} className={styles.marqueeItem}>
+              {item}
+              <span className={styles.marqueeDot}>✦</span>
+            </span>
+          ))}
+        </div>
+      </motion.div>
 
+      {/* ── CTAs + note ── */}
+      <div className={styles.bottomContent}>
         <motion.div
           className={styles.ctas}
           initial={shouldReduce ? false : { opacity: 0, y: 20 }}
@@ -150,8 +181,8 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 2.0, duration: 0.8 }}
         >
-          designed with obsessive care —{' '}
-          somewhere between a deadline and a <em>dream</em> ✦
+          Designed with care, Pursuing each workflow like a dream{' '}
+          <em className={styles.noteSpark}>✦</em>
         </motion.p>
       </div>
 

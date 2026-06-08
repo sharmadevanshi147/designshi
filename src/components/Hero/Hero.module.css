@@ -35,7 +35,58 @@
   animation: float 11s ease-in-out infinite reverse;
 }
 
-/* ── Top content: eyebrow + greeting ── */
+/* ── Polaroid stage ── */
+.polaroidStage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.polaroid {
+  position: absolute;
+  pointer-events: all;
+  width: clamp(100px, 12vw, 160px);
+  background: #fff;
+  padding: 10px 10px 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.08);
+  cursor: grab;
+  will-change: transform;
+}
+
+.polaroidPhoto {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--color-ink-10);
+}
+
+.polaroidPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroidPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-accent-lt) 0%, var(--color-surface) 100%);
+}
+
+.polaroidLabel {
+  font-family: var(--font-plex);
+  font-size: 0.6rem;
+  color: rgba(0,0,0,0.35);
+  text-align: center;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ── Top content: greeting only ── */
 .topContent {
   position: relative;
   z-index: 2;
@@ -46,32 +97,6 @@
   padding: calc(var(--navbar-height) + 40px) 64px 0;
   width: 100%;
   max-width: 900px;
-}
-
-/* Eyebrow pill */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-ink-50);
-  margin-bottom: 24px;
-  padding: 7px 18px;
-  border: 1px solid var(--color-ink-10);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-}
-
-.eyebrowDot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--color-accent-mint);
-  flex-shrink: 0;
-  animation: pulse-ring 2s ease infinite;
 }
 
 /* "Hi, I'm" */
@@ -124,22 +149,54 @@
   margin-top: 16px;
 }
 
-/* Rotating tagline */
-.taglineWrap {
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 28px;
+/* ── Marquee ── */
+.marqueeWrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   overflow: hidden;
+  /* 64px inset on each side via mask */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 64px,
+    black calc(100% - 64px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 64px,
+    black calc(100% - 64px),
+    transparent 100%
+  );
+  margin-bottom: 28px;
 }
 
-.tagline {
+.marqueeTrack {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marqueeItem {
   font-family: var(--font-display);
-  font-style: normal;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  color: var(--color-ink-70);
-  text-align: center;
+  font-size: clamp(0.875rem, 1.3vw, 1.125rem);
+  color: var(--color-ink-50);
+  white-space: nowrap;
+  padding: 0 12px;
+}
+
+.marqueeDot {
+  color: var(--color-accent);
+  margin-left: 12px;
+  font-size: 0.75em;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* CTAs */
@@ -185,7 +242,7 @@
   font-weight: 500;
   transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
-.ctaSecondary:hover { border-color: var(--color-ink); background: var(--color-ink-10); transform: translateY(-2px); }
+.ctaSecondary:hover { border-color: var(--color-ink-30); background: #FFF8EE; color: var(--color-ink); transform: translateY(-2px); }
 
 /* Note */
 .note {
@@ -195,7 +252,11 @@
   color: var(--color-ink-50);
   text-align: center;
 }
-.note em { font-style: normal; color: var(--color-accent); }
+.noteSpark {
+  font-style: normal;
+  color: var(--color-accent);
+  -webkit-text-fill-color: var(--color-accent);
+}
 
 /* ── Social sidebar — fixed, always visible ── */
 .socials {
