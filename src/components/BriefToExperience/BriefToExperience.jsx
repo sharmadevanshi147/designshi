@@ -323,16 +323,15 @@ export default function BriefToExperience() {
         </AnimatePresence>
       </div>
 
-      {/* ── Text reveal ── */}
+      {/* ── Text — visible from sketch phase onwards ── */}
       <AnimatePresence>
-        {phase === 'reveal' && (
+        {phase !== 'idle' && (
           <motion.div
             className={styles.reveal}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EXPO, delay: 0.2 }}
+            transition={{ duration: 0.8, ease: EXPO, delay: 0.3 }}
           >
-            <p className={styles.eyebrow}>What We Build Together</p>
             <h2 className={styles.heading}>Turning Briefs to Experiences</h2>
             <p className={styles.sub}>Drop a message to work with me</p>
             <a href="mailto:devanshisharma3574@gmail.com" className={styles.cta}>
