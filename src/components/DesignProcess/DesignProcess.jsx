@@ -132,22 +132,23 @@ export default function DesignProcess() {
               animate={inView || shouldReduce ? { pathLength: 1 } : {}}
               transition={{ duration: 1.8, ease: EXPO, delay: 0.3 }}
             />
-
-            {/* Stage dots on the wave */}
-            {STAGES.map((stage, i) => (
-              <motion.circle
-                key={stage.num}
-                cx={DOT_POSITIONS[i][0]}
-                cy={DOT_POSITIONS[i][1]}
-                r={10}
-                fill={stage.color}
-                initial={shouldReduce ? false : { scale: 0, opacity: 0 }}
-                animate={inView || shouldReduce ? { scale: 1, opacity: 1 } : {}}
-                transition={{ duration: 0.4, ease: EXPO, delay: 0.5 + i * 0.1 }}
-                style={{ transformOrigin: `${DOT_POSITIONS[i][0]}px ${DOT_POSITIONS[i][1]}px` }}
-              />
-            ))}
           </motion.svg>
+
+          {/* Stage dots — placed as HTML divs so they stay circular */}
+          {STAGES.map((stage, i) => (
+            <motion.div
+              key={stage.num}
+              className={styles.waveDot}
+              style={{
+                left: `${(DOT_POSITIONS[i][0] / 1200) * 100}%`,
+                top: `${(DOT_POSITIONS[i][1] / 120) * 100}%`,
+                background: stage.color,
+              }}
+              initial={shouldReduce ? false : { scale: 0, opacity: 0 }}
+              animate={inView || shouldReduce ? { scale: 1, opacity: 1 } : {}}
+              transition={{ duration: 0.4, ease: EXPO, delay: 0.5 + i * 0.1 }}
+            />
+          ))}
         </div>
 
         {/* BOTTOM ROW — stages that sit below the wave (indices 1,3,5) */}

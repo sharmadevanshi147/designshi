@@ -1,13 +1,12 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
-  padding-bottom: 64px;
+  overflow: hidden;
 }
 
 /* ── Blobs ── */
@@ -35,68 +34,29 @@
   animation: float 11s ease-in-out infinite reverse;
 }
 
-/* ── Polaroid stage ── */
-.polaroidStage {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.polaroid {
-  position: absolute;
-  pointer-events: all;
-  width: clamp(100px, 12vw, 160px);
-  background: #fff;
-  padding: 10px 10px 28px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.08);
-  cursor: grab;
-  will-change: transform;
-}
-
-.polaroidPhoto {
-  width: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--color-ink-10);
-}
-
-.polaroidPhoto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.polaroidPlaceholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, var(--color-accent-lt) 0%, var(--color-surface) 100%);
-}
-
-.polaroidLabel {
-  font-family: var(--font-plex);
-  font-size: 0.6rem;
-  color: rgba(0,0,0,0.35);
-  text-align: center;
-  margin-top: 6px;
-  font-style: italic;
-}
-
-/* ── Top content: greeting only ── */
-.topContent {
+/* ── Two-column hero grid ── */
+.heroGrid {
   position: relative;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+  padding: var(--navbar-height) 64px 32px;
+  box-sizing: border-box;
+}
+
+/* ── Left column: centered content ── */
+.leftCol {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: calc(var(--navbar-height) + 40px) 64px 0;
-  width: 100%;
-  max-width: 900px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* "Hi, I'm" */
@@ -109,10 +69,8 @@
   margin-bottom: 4px;
 }
 
-/* ── NAME RIBBON — full-width, text only, no band ── */
-.nameRibbon {
-  position: relative;
-  z-index: 2;
+/* ── Name ── */
+.nameWrap {
   width: 100%;
   overflow: hidden;
   padding: 10px 0 14px;
@@ -126,8 +84,7 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 400;
-  /* ~90 px at typical laptop viewport (1400 px → 6.5 vw = 91 px) */
-  font-size: clamp(72px, 6.5vw, 108px);
+  font-size: clamp(60px, 5.5vw, 100px);
   line-height: 0.9;
   letter-spacing: 0;
   color: var(--color-ink);
@@ -135,39 +92,22 @@
   vertical-align: middle;
 }
 
-/* ── Bottom content: tagline + CTAs + note ── */
-.bottomContent {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0 64px;
-  width: 100%;
-  max-width: 900px;
-  margin-top: 16px;
-}
-
 /* ── Marquee ── */
 .marqueeWrap {
-  position: relative;
-  z-index: 2;
   width: 100%;
   overflow: hidden;
-  /* 64px inset on each side via mask */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 64px,
-    black calc(100% - 64px),
+    black 32px,
+    black calc(100% - 32px),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 64px,
-    black calc(100% - 64px),
+    black 32px,
+    black calc(100% - 32px),
     transparent 100%
   );
   margin-bottom: 28px;
@@ -258,6 +198,35 @@
   -webkit-text-fill-color: var(--color-accent);
 }
 
+/* ── Right column: portrait ── */
+.rightCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.portraitWrap {
+  max-width: 100%;
+  max-height: calc(100svh - var(--navbar-height) - 80px);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.10),
+    0 2px 8px rgba(0,0,0,0.06);
+}
+
+.portraitImg {
+  width: auto;
+  height: 700px;
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
 /* ── Social sidebar — fixed, always visible ── */
 .socials {
   position: fixed;
@@ -318,16 +287,24 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .topContent, .bottomContent { padding-left: 48px; padding-right: 48px; }
-  /* socials stays visible — fixed strip */
+  .heroGrid { padding-left: 48px; padding-right: 48px; gap: 32px; }
   .socials { right: 16px; gap: 10px; }
 }
 
+@media (max-width: 768px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+  .rightCol { order: -1; }
+  .portraitWrap { max-width: 320px; }
+}
+
 @media (max-width: 640px) {
-  .topContent { padding-left: 24px; padding-right: 24px; }
-  .bottomContent { padding-left: 24px; padding-right: 24px; }
-  .name { font-size: clamp(60px, 14vw, 90px); }
+  .heroGrid { padding-left: 24px; padding-right: 24px; }
+  .name { font-size: clamp(48px, 12vw, 72px); }
   .decoBlob1, .decoBlob2 { display: none; }
-  /* Hide sidebar on mobile — too cramped */
   .socials { display: none; }
+  .portraitWrap { max-width: 260px; }
 }
