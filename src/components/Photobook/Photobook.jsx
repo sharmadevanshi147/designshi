@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import styles from './Photobook.module.css'
 
@@ -19,48 +19,70 @@ const SCRAPBOOK_IMAGES = [
   '/designshi/Scrapbook/Screenshot 2024-08-25 12.50.53 AM.png',
   '/designshi/Scrapbook/Screenshot 2024-08-25 12.53.35 AM.png',
   '/designshi/Scrapbook/image (2).png',
-  null, // empty page to make 16
 ]
 
 /*
-  8 spreads × 2 pages = 16 pages.
-  Colors: right page of spread N === left page of spread N+1.
+  Distribute images across pages, 2–3 per page.
+  Each page entry = array of image srcs.
 */
-const SPREADS = [
-  { left: '#FFD6A5', right: '#FFCBA4' },
-  { left: '#FFCBA4', right: '#E8D5B7' },
-  { left: '#E8D5B7', right: '#B5D5C5' },
-  { left: '#B5D5C5', right: '#FFB5C8' },
-  { left: '#FFB5C8', right: '#D5C5E8' },
-  { left: '#D5C5E8', right: '#C5D8E8' },
-  { left: '#C5D8E8', right: '#D4A97A' },
-  { left: '#D4A97A', right: '#F0D6A8' },
+function buildPages(images) {
+  const pages = []
+  let i = 0
+  let toggle = true // alternates between 2 and 3
+  while (i < images.length) {
+    const count = toggle ? 2 : 3
+    toggle = !toggle
+    pages.push(images.slice(i, i + count).filter(Boolean))
+    i += count
+  }
+  return pages
+}
+
+const PAGES = buildPages(SCRAPBOOK_IMAGES)
+// Pair pages into spreads (left + right)
+const SPREADS = []
+for (let i = 0; i < PAGES.length; i += 2) {
+  SPREADS.push({
+    left: PAGES[i] || [],
+    right: PAGES[i + 1] || [],
+  })
+}
+
+/* Rotation presets per image slot */
+const TILTS = [
+  ['-2deg', '2.5deg'],
+  ['1.5deg', '-1deg', '2deg'],
+  ['-1.5deg', '1deg'],
+  ['2deg', '-2.5deg', '0.5deg'],
+  ['-1deg', '1.5deg'],
+  ['0.5deg', '-1.5deg', '2.5deg'],
+  ['-2deg', '1deg'],
+  ['1.5deg', '-2deg', '0.5deg'],
 ]
 
-/* Slight tilts per page for scrapbook feel */
-const ROTATIONS = [
-  '-2deg', '1.5deg', '-1deg', '2deg',
-  '-1.5deg', '1deg', '-2.5deg', '0.5deg',
-  '2deg', '-1deg', '1.5deg', '-2deg',
-  '0.5deg', '-1.5deg', '2.5deg', '0deg',
-]
-
-/* Renders a page's content (colored background + image) */
-function PageContent({ color, imageSrc, rotation }) {
+/* Renders a page's content (beige paper background + multiple images) */
+function PageContent({ images, pageIndex }) {
+  const tilts = TILTS[pageIndex % TILTS.length] || ['0deg']
   return (
-    <div className={styles.pageBg} style={{ background: color }}>
-      {imageSrc && (
-        <div className={styles.photoCard} style={{ transform: `rotate(${rotation})` }}>
-          <img src={imageSrc} alt="Scrapbook" className={styles.photoCardImg} />
-        </div>
-      )}
+    <div className={styles.pageBg}>
+      <div className={styles.photoGrid}>
+        {images.map((src, i) => (
+          <div
+            key={src}
+            className={styles.photoCard}
+            style={{ transform: `rotate(${tilts[i % tilts.length]})` }}
+          >
+            <img src={src} alt="Scrapbook" className={styles.photoCardImg} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
 
 export default function Photobook() {
   const [page, setPage] = useState(0)
-  const [flipping, setFlipping] = useState(null) // 'forward' | 'backward' | null
+  const [flipping, setFlipping] = useState(null)
   const shouldReduce = useReducedMotion()
 
   const flipDuration = shouldReduce ? 50 : 1000
@@ -92,14 +114,16 @@ export default function Photobook() {
     }, flipDuration)
   }
 
-  /* Page indices */
-  const leftIdx = page * 2
-  const rightIdx = page * 2 + 1
+  /* Spread page data */
+  const curSpread = SPREADS[page]
+  const destIdx = flipping === 'forward' ? page + 1 : flipping === 'backward' ? page - 1 : page
+  const destSpread = SPREADS[destIdx]
 
-  /* Destination spread (what we'll land on after the flip) */
-  const destPage = flipping === 'forward' ? page + 1 : flipping === 'backward' ? page - 1 : page
-  const destLeftIdx = destPage * 2
-  const destRightIdx = destPage * 2 + 1
+  /* Global page indices for tilts */
+  const leftPageIdx = page * 2
+  const rightPageIdx = page * 2 + 1
+  const destLeftPageIdx = destIdx * 2
+  const destRightPageIdx = destIdx * 2 + 1
 
   return (
     <section className={styles.section} id="life" aria-label="Life photobook">
@@ -134,11 +158,6 @@ export default function Photobook() {
 
             {/* ── Left page slot ── */}
             <div className={styles.pageSlot}>
-              {/*
-                Static page underneath:
-                - During backward flip → show destination left (what we're going to)
-                - Otherwise → show current left
-              */}
               <div
                 className={`${styles.page} ${styles.pageLeft}`}
                 onClick={prev}
@@ -148,9 +167,8 @@ export default function Photobook() {
                 aria-label="Previous spread"
               >
                 <PageContent
-                  color={flipping === 'backward' ? SPREADS[destPage].left : SPREADS[page].left}
-                  imageSrc={flipping === 'backward' ? SCRAPBOOK_IMAGES[destLeftIdx] : SCRAPBOOK_IMAGES[leftIdx]}
-                  rotation={flipping === 'backward' ? ROTATIONS[destLeftIdx] : ROTATIONS[leftIdx]}
+                  images={flipping === 'backward' ? destSpread.left : curSpread.left}
+                  pageIndex={flipping === 'backward' ? destLeftPageIdx : leftPageIdx}
                 />
                 <div className={styles.pageHint} aria-hidden="true">‹</div>
               </div>
@@ -160,17 +178,12 @@ export default function Photobook() {
                 <div className={`${styles.flipOverlay} ${styles.flipBackward} ${shouldReduce ? styles.noAnim : ''}`}>
                   <div className={styles.flipInner}>
                     <div className={styles.flipFront}>
-                      <PageContent
-                        color={SPREADS[page].left}
-                        imageSrc={SCRAPBOOK_IMAGES[leftIdx]}
-                        rotation={ROTATIONS[leftIdx]}
-                      />
+                      <PageContent images={curSpread.left} pageIndex={leftPageIdx} />
                     </div>
                     <div className={styles.flipBack}>
                       <PageContent
-                        color={SPREADS[page - 1].right}
-                        imageSrc={SCRAPBOOK_IMAGES[(page - 1) * 2 + 1]}
-                        rotation={ROTATIONS[(page - 1) * 2 + 1]}
+                        images={SPREADS[page - 1].right}
+                        pageIndex={(page - 1) * 2 + 1}
                       />
                     </div>
                   </div>
@@ -180,11 +193,6 @@ export default function Photobook() {
 
             {/* ── Right page slot ── */}
             <div className={styles.pageSlot}>
-              {/*
-                Static page underneath:
-                - During forward flip → show destination right (what we're going to)
-                - Otherwise → show current right
-              */}
               <div
                 className={`${styles.page} ${styles.pageRight}`}
                 onClick={next}
@@ -194,9 +202,8 @@ export default function Photobook() {
                 aria-label="Next spread"
               >
                 <PageContent
-                  color={flipping === 'forward' ? SPREADS[destPage].right : SPREADS[page].right}
-                  imageSrc={flipping === 'forward' ? SCRAPBOOK_IMAGES[destRightIdx] : SCRAPBOOK_IMAGES[rightIdx]}
-                  rotation={flipping === 'forward' ? ROTATIONS[destRightIdx] : ROTATIONS[rightIdx]}
+                  images={flipping === 'forward' ? destSpread.right : curSpread.right}
+                  pageIndex={flipping === 'forward' ? destRightPageIdx : rightPageIdx}
                 />
                 <div className={styles.pageHint} aria-hidden="true">›</div>
               </div>
@@ -206,17 +213,12 @@ export default function Photobook() {
                 <div className={`${styles.flipOverlay} ${styles.flipForward} ${shouldReduce ? styles.noAnim : ''}`}>
                   <div className={styles.flipInner}>
                     <div className={styles.flipFront}>
-                      <PageContent
-                        color={SPREADS[page].right}
-                        imageSrc={SCRAPBOOK_IMAGES[rightIdx]}
-                        rotation={ROTATIONS[rightIdx]}
-                      />
+                      <PageContent images={curSpread.right} pageIndex={rightPageIdx} />
                     </div>
                     <div className={styles.flipBack}>
                       <PageContent
-                        color={SPREADS[page + 1].left}
-                        imageSrc={SCRAPBOOK_IMAGES[(page + 1) * 2]}
-                        rotation={ROTATIONS[(page + 1) * 2]}
+                        images={SPREADS[page + 1].left}
+                        pageIndex={(page + 1) * 2}
                       />
                     </div>
                   </div>

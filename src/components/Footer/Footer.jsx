@@ -93,11 +93,6 @@ export default function Footer() {
             display="devanshisharma3574@gmail.com"
             icon="✉︎"
           />
-          <CopyItem
-            value="+917838997914"
-            display="+91 7838997914"
-            icon="☎"
-          />
         </div>
       </div>
 

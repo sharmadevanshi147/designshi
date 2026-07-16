@@ -73,54 +73,134 @@
   transform: scale(1.35);
 }
 
-/* ── Spread wrapper (clips during animation) ── */
+/* ── Spread wrapper ── */
 .spreadWrap {
   width: 100%;
   overflow: visible;
-  border-radius: 20px;
+  border-radius: 6px;
+  position: relative;
 }
 
-/* ── Spread (book two-page layout) — same as original ── */
+/* Stacked page edges */
+.spreadWrap::before,
+.spreadWrap::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  border-radius: 0 0 4px 4px;
+  pointer-events: none;
+}
+
+.spreadWrap::before {
+  bottom: -4px;
+  height: 100%;
+  background: #D8C9A8;
+  z-index: -1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.spreadWrap::after {
+  bottom: -8px;
+  left: 8px;
+  right: 8px;
+  height: 100%;
+  background: #CABF9E;
+  z-index: -2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ── Spread ── */
 .spread {
   width: 100%;
   display: grid;
-  grid-template-columns: 28px 1fr 1fr;
-  border-radius: 20px;
+  grid-template-columns: 32px 1fr 1fr;
+  border-radius: 6px;
   box-shadow:
-    0 4px 16px rgba(0,0,0,0.08),
-    0 24px 80px rgba(0,0,0,0.12),
-    inset 0 0 0 1px var(--color-ink-10);
+    0 1px 3px rgba(0,0,0,0.06),
+    0 8px 24px rgba(0,0,0,0.10),
+    0 30px 80px rgba(0,0,0,0.12);
   overflow: hidden;
-  min-height: 520px;
+  min-height: 700px;
+  position: relative;
 }
 
-/* ── Spine ── */
+/* ── Spine — leather binding ── */
 .spine {
-  background: var(--color-accent);
+  background:
+    linear-gradient(
+      90deg,
+      #6B3A2A 0%,
+      #7D4830 20%,
+      #8B5338 40%,
+      #7D4830 60%,
+      #6B3A2A 80%,
+      #5C3024 100%
+    );
   display: flex;
   align-items: center;
   justify-content: center;
   writing-mode: vertical-rl;
   padding: 24px 4px;
   z-index: 10;
+  position: relative;
+  box-shadow:
+    inset 1px 0 0 rgba(255,255,255,0.08),
+    inset -1px 0 0 rgba(0,0,0,0.2),
+    2px 0 8px rgba(0,0,0,0.15),
+    -1px 0 4px rgba(0,0,0,0.1);
+}
+
+/* Stitching */
+.spine::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 5px;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,220,180,0.4) 0px,
+    rgba(255,220,180,0.4) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.spine::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 5px;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,220,180,0.4) 0px,
+    rgba(255,220,180,0.4) 4px,
+    transparent 4px,
+    transparent 8px
+  );
 }
 
 .spineText {
   font-family: var(--font-body);
-  font-size: 0.625rem;
+  font-size: 0.5625rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  color: #fff;
+  letter-spacing: 0.25em;
+  color: rgba(255,220,180,0.7);
   transform: rotate(180deg);
+  text-transform: uppercase;
 }
 
-/* ── Page slot — relative container ── */
+/* ── Page slot ── */
 .pageSlot {
   position: relative;
   overflow: hidden;
 }
 
-/* ── Pages — same dimensions as original ── */
+/* ── Pages ── */
 .page {
   position: relative;
   overflow: hidden;
@@ -130,36 +210,141 @@
   height: 100%;
 }
 
+/* Center fold shadow */
 .pageLeft {
-  border-right: 1px solid var(--color-ink-10);
+  box-shadow: inset -8px 0 16px -8px rgba(0,0,0,0.08);
 }
 
-/* ── Page background ── */
+.pageRight {
+  box-shadow: inset 8px 0 16px -8px rgba(0,0,0,0.06);
+}
+
+/* ── Page background — old beige scroll paper ── */
 .pageBg {
   width: 100%;
   height: 100%;
-  min-height: 500px;
+  min-height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 28px;
   transition: filter 0.3s;
+  /* Aged parchment base */
+  background:
+    /* Coffee stain ring (subtle) */
+    radial-gradient(ellipse at 72% 28%, rgba(160,120,60,0.06) 0%, transparent 45%),
+    /* Warm vignette edges */
+    radial-gradient(ellipse at center, transparent 50%, rgba(120,90,40,0.08) 100%),
+    /* Base parchment color */
+    linear-gradient(
+      175deg,
+      #F2E6C9 0%,
+      #EDE0C0 15%,
+      #E8D8B4 35%,
+      #EEDDB9 55%,
+      #E5D4AE 75%,
+      #E0CEA6 100%
+    );
+  /* Paper grain */
+  background-blend-mode: normal;
 }
 
-.page:hover .pageBg { filter: brightness(0.96); }
+.page:hover .pageBg { filter: brightness(0.97); }
 
-/* ── Photo card (centered image on page) ── */
+/* Faint ruled lines */
+.pageBg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    rgba(120,90,40,0.05) 31px,
+    rgba(120,90,40,0.05) 32px
+  );
+  pointer-events: none;
+}
+
+/* Aged paper spots/foxing */
+.pageBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 85%, rgba(140,100,40,0.05) 0%, transparent 3%),
+    radial-gradient(circle at 80% 15%, rgba(140,100,40,0.04) 0%, transparent 2%),
+    radial-gradient(circle at 45% 60%, rgba(140,100,40,0.03) 0%, transparent 4%),
+    radial-gradient(circle at 90% 75%, rgba(140,100,40,0.05) 0%, transparent 2%);
+  pointer-events: none;
+}
+
+/* Page corner curl */
+.pageRight .pageBg > .photoGrid::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(0,0,0,0.04) 50%,
+    rgba(0,0,0,0.06) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Photo grid (2–3 images per page) ── */
+.photoGrid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+  position: relative;
+}
+
+/* ── Photo card ── */
 .photoCard {
+  flex: 1 1 42%;
+  max-width: 48%;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 88%;
-  max-height: 88%;
-  border-radius: 6px;
   overflow: hidden;
   transition: transform 0.3s ease;
   z-index: 2;
+  position: relative;
+}
+
+/* Tape strip */
+.photoCard::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 42px;
+  height: 12px;
+  background: rgba(255,255,220,0.45);
+  border-radius: 1px;
+  z-index: 3;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.photoCard:nth-child(2)::before {
+  transform: translateX(-50%) rotate(1.5deg);
+}
+
+.photoCard:nth-child(3)::before {
+  transform: translateX(-50%) rotate(-0.5deg);
+  width: 38px;
 }
 
 .photoCard:hover {
@@ -170,11 +355,14 @@
 .photoCardImg {
   display: block;
   max-width: 100%;
-  max-height: 440px;
+  max-height: 290px;
   width: auto;
   height: auto;
-  border-radius: 4px;
+  border-radius: 2px;
   object-fit: contain;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.1),
+    0 4px 12px rgba(0,0,0,0.06);
 }
 
 /* Page turn hint */
@@ -183,11 +371,10 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.15);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   z-index: 6;
 }
 
@@ -217,13 +404,11 @@
   transform-style: preserve-3d;
 }
 
-/* Forward: right page flips left, hinged on left (spine) edge */
 .flipForward .flipInner {
   transform-origin: left center;
   animation: flipForwardAnim 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
-/* Backward: left page flips right, hinged on right (spine) edge */
 .flipBackward .flipInner {
   transform-origin: right center;
   animation: flipBackwardAnim 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
@@ -250,7 +435,6 @@
   transform: rotateY(180deg);
 }
 
-/* Reduced motion */
 .noAnim .flipInner {
   animation: none !important;
 }
@@ -341,11 +525,18 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .spread { grid-template-columns: 20px 1fr; min-height: auto; }
+  .spread { grid-template-columns: 24px 1fr; min-height: auto; }
+  .pageBg { min-height: 500px; }
   .pageSlot:last-child { display: none; }
   .section { padding: 72px 32px 64px; }
+  .spreadWrap::before { display: none; }
+  .spreadWrap::after { display: none; }
+  .photoCardImg { max-height: 200px; }
 }
 
 @media (max-width: 640px) {
   .section { padding: 60px 20px 64px; }
+  .pageBg { min-height: 400px; }
+  .photoCardImg { max-height: 160px; }
+  .photoCard { flex: 1 1 90%; max-width: 90%; }
 }
