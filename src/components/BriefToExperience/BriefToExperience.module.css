@@ -88,7 +88,7 @@
   position: absolute;
   top: -28px;
   left: 0;
-  font-family: var(--font-plex, 'IBM Plex Sans', sans-serif);
+  font-family: var(--font-plex, 'DM Sans', sans-serif);
   font-size: 0.75rem;
   font-style: italic;
   color: rgba(255,255,255,0.3);
@@ -391,7 +391,7 @@
 }
 
 .sub {
-  font-family: var(--font-plex, 'IBM Plex Sans', sans-serif);
+  font-family: var(--font-plex, 'DM Sans', sans-serif);
   font-size: 1rem;
   color: rgba(255,255,255,0.45);
 }
@@ -404,7 +404,7 @@
   border-radius: 999px;
   background: var(--color-accent, #EA5DB4);
   color: #fff;
-  font-family: var(--font-plex, 'IBM Plex Sans', sans-serif);
+  font-family: var(--font-plex, 'DM Sans', sans-serif);
   font-size: 0.9375rem;
   font-weight: 600;
   margin-top: 6px;

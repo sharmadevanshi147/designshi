@@ -108,9 +108,9 @@
 
 /* ── Typography — 2 fonts only ── */
 :root {
-  --font-display:  'Alice', Georgia, 'Times New Roman', serif;
+  --font-display:  'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-plex:     'IBM Plex Sans', 'DM Sans', system-ui, sans-serif;
+  --font-plex:     'DM Sans', system-ui, -apple-system, sans-serif;
 
   /* — Legacy aliases so old component refs still resolve — */
   --font-syne:    var(--font-display);

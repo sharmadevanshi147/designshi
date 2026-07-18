@@ -73,7 +73,7 @@
   margin-bottom: 20px;
 }
 
-/* ── Bio (body text, IBM Plex Sans) ── */
+/* ── Bio (body text, DM Sans) ── */
 .bio {
   font-family: var(--font-plex);
   font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
