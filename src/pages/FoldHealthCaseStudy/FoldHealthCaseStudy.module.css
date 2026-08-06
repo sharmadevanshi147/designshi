@@ -1,0 +1,226 @@
+.page {
+  min-height: 100vh;
+  background: #FFFFFF;
+  color: #000000;
+  padding: 120px 64px;
+}
+
+.mainColumn {
+  max-width: 1379px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.contentWrap {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ── Hero (tags + title + subtitle) ── */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #0C0C0C;
+  background: #F6ECFF;
+  border: 0.5px solid #EED7FC;
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.headingBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1359px;
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #0C0C0C;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+/* ── Cover illustration ── */
+.coverFrame {
+  width: 100%;
+  max-width: 1359px;
+}
+
+.coverImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 32px;
+}
+
+/* ── Section heading + block patterns (shared with other case studies) ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.48px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.bigBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.blockTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.bigBlockImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.subsectionTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  color: #000000;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+.body {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0 0 16px 0;
+}
+
+.body:last-child {
+  margin-bottom: 0;
+}
+
+.bulletList {
+  list-style: disc;
+  padding-left: 36px;
+  margin: 0 0 16px 0;
+}
+
+.bulletList .body {
+  margin-bottom: 0;
+}
+
+.keyWorksStack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.keyWorkCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+.keyWorkImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1500px) {
+  .title { font-size: clamp(2.25rem, 6vw, 64px); }
+  .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
+  .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
+  .blockTitle { font-size: clamp(2.25rem, 6vw, 64px); }
+  .subsectionTitle { font-size: clamp(1.5rem, 3vw, 32px); }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 80px 24px; }
+  .contentWrap { padding: 6px; gap: 32px; }
+  .mainColumn { gap: 40px; }
+}

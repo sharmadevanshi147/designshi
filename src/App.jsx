@@ -14,6 +14,8 @@ import Footer              from './components/Footer/Footer'
 const BriefToExperience = lazy(() => import('./components/BriefToExperience/BriefToExperience'))
 import ProjectPage   from './pages/ProjectPage/ProjectPage'
 import GoodreadsCaseStudy from './pages/GoodreadsCaseStudy/GoodreadsCaseStudy'
+import FoldHealthCaseStudy from './pages/FoldHealthCaseStudy/FoldHealthCaseStudy'
+import BalnceCaseStudy from './pages/BalnceCaseStudy/BalnceCaseStudy'
 
 function HomePage() {
   return (
@@ -44,6 +46,8 @@ export default function App() {
           <Routes>
             <Route path="/"               element={<HomePage />} />
             <Route path="/projects/goodreads" element={<><Navbar /><GoodreadsCaseStudy /></>} />
+            <Route path="/projects/foldhealth" element={<><Navbar /><FoldHealthCaseStudy /></>} />
+            <Route path="/projects/balnce" element={<><Navbar /><BalnceCaseStudy /></>} />
             <Route path="/projects/:slug" element={<><Navbar /><ProjectPage /></>} />
             <Route path="*"               element={<HomePage />} />
           </Routes>

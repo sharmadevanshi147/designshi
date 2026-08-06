@@ -5,64 +5,424 @@
   padding: 120px 64px;
 }
 
+.mainColumn {
+  max-width: 1379px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.contentWrap {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ── Hero (tags + title + subtitle) ── */
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
-/* ── Eyebrow tag row ── */
 .tagRow {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .tag {
   font-family: 'DM Mono', monospace;
   font-weight: 300;
   font-size: 16px;
-  line-height: 120%;
+  line-height: 1.2;
   letter-spacing: 0;
   color: #0C0C0C;
   background: #FFFCEC;
   border: 0.5px solid #C5B09C;
   border-radius: 4px;
   padding: 4px;
+  text-align: center;
+  white-space: nowrap;
 }
 
-/* ── Title ── */
-.title {
-  font-family: 'Fraunces', serif;
-  font-weight: 400;
-  font-size: 90px;
-  line-height: 100%;
-  letter-spacing: -1%;
-  color: #000000;
-  text-align: center;
+.headingBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   max-width: 1359px;
 }
 
-/* ── Subtitle ── */
+.title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
 .subtitle {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 24px;
-  line-height: 1.3;
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: normal;
   letter-spacing: 0;
   color: #0C0C0C;
   text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+/* ── Cover image ── */
+.coverFrame {
+  width: 100%;
   max-width: 1359px;
 }
 
+.coverImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1359 / 720;
+}
+
+/* ── Overview section ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.48px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.subsectionTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.24px;
+  color: #000000;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+.body {
+  font-family: 'DM Sans', sans-serif;
+  font-variation-settings: "opsz" 14;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0 0 16px 0;
+  white-space: pre-wrap;
+}
+
+.body:last-child {
+  margin-bottom: 0;
+}
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.roleCard {
+  background: #FFFCEC;
+  border: 1px dashed rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roleCardText {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0;
+}
+
+/* ── Problem section ── */
+.problemRow {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+}
+
+.problemText {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.problemBody,
+.problemBodyBold {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  color: #0C0C0C;
+  margin: 0 0 16px 0;
+}
+
+.problemBody {
+  font-weight: 500;
+}
+
+.problemBodyBold {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.problemBullets {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 0 0 16px 0;
+}
+
+.problemBullets .problemBody {
+  margin-bottom: 0;
+}
+
+.problemImageCard {
+  flex-shrink: 0;
+  width: 311.66px;
+  height: 310px;
+  background: #FFFCEC;
+  border: 0.5px dashed #000000;
+  border-radius: 15.17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.problemImage {
+  display: block;
+  width: 183px;
+  height: 190px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .problemRow { flex-direction: column-reverse; }
+  .problemImageCard { width: 100%; max-width: 311.66px; }
+}
+
+/* ── Plan section ── */
+.planIntro {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0;
+}
+
+.heuristicStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+}
+
+.heuristicImage {
+  display: block;
+  height: 680px;
+  width: auto;
+  max-width: 100%;
+}
+
+.timelineWrap {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.timelineImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Research section ── */
+.researchFeedbackBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.researchIntro {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.18px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.researchFeedbackImage,
+.researchScreensImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.researchBody {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0;
+}
+
+.researchHighlight {
+  font-weight: 600;
+  color: #024914;
+}
+
+/* ── User Persona / Empathy Map / Information Architecture ── */
+.bigBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.blockTitle {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -0.64px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.bigBlockImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Design System Decisions ── */
+.systemSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.systemSubsections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.systemSubsection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+.systemSubsectionText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.systemHeading {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+}
+
+.systemImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @media (max-width: 1500px) {
-  .title { font-size: clamp(2.5rem, 6vw, 90px); }
-  .subtitle { font-size: clamp(1rem, 2vw, 24px); }
+  .title { font-size: clamp(2.25rem, 6vw, 64px); }
+  .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
+  .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
+  .blockTitle { font-size: clamp(2.25rem, 6vw, 64px); }
+  .systemHeading { font-size: clamp(1.5rem, 3vw, 32px); }
+}
+
+@media (max-width: 900px) {
+  .roleGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
   .page { padding: 80px 24px; }
+  .contentWrap { padding: 6px; gap: 32px; }
+  .mainColumn { gap: 40px; }
+  .roleGrid { grid-template-columns: 1fr; }
 }
