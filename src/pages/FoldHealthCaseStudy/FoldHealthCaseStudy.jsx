@@ -1,6 +1,6 @@
 import styles from './FoldHealthCaseStudy.module.css'
 
-const TAGS = ['Hackathon Case', 'Created Under 24 Hours', 'UX Design', 'UI Development']
+const TAGS = ['Case Study', 'Healthcare', 'Enterprise UX', 'Product Design']
 
 const FOLD_PLATFORM_ITEMS = [
   'Care team collaboration and communication',

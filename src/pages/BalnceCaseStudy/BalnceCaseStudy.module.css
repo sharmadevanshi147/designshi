@@ -132,7 +132,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -140,9 +140,9 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 64px;
+  font-size: 48px;
   line-height: 1.2;
-  letter-spacing: -0.64px;
+  letter-spacing: -0.48px;
   color: #000000;
   width: 100%;
   margin: 0;
@@ -176,7 +176,7 @@
 .body {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  font-size: 24px;
+  font-size: 16px;
   line-height: normal;
   color: #394147;
   width: 100%;
@@ -189,8 +189,8 @@
 
 .bodyStrong {
   font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: 24px;
+  font-weight: 600;
+  font-size: 16px;
   line-height: normal;
   color: #394147;
   width: 100%;
@@ -315,7 +315,7 @@
   .title { font-size: clamp(2.25rem, 6vw, 64px); }
   .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
   .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
-  .blockTitle { font-size: clamp(2.25rem, 6vw, 64px); }
+  .blockTitle { font-size: clamp(1.75rem, 4vw, 48px); }
   .subsectionTitle { font-size: clamp(1.5rem, 3vw, 32px); }
   .iaRow { flex-direction: column; }
 }
