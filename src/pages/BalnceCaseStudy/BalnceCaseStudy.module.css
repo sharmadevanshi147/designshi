@@ -46,8 +46,8 @@
   line-height: 1.2;
   letter-spacing: 0;
   color: #0C0C0C;
-  background: #FFF0F3;
-  border: 0.5px solid #FADADF;
+  background: #EFECFF;
+  border: 0.5px solid #E5D7FC;
   border-radius: 4px;
   padding: 4px;
   text-align: center;
@@ -87,23 +87,17 @@
   margin: 0;
 }
 
-/* ── Cover illustration (placeholder until real asset exists) ── */
+/* ── Cover illustration ── */
 .coverFrame {
   width: 100%;
   max-width: 1359px;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to bottom, #FFFFFF, #FFF0F3);
-  border: 1px dashed #000000;
-  border-radius: 32px;
 }
 
 .coverImage {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 1359 / 800;
   border-radius: 32px;
 }
 
@@ -193,6 +187,16 @@
   margin-bottom: 0;
 }
 
+.bodyStrong {
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: normal;
+  color: #0C0C0C;
+  width: 100%;
+  margin: 0 0 16px 0;
+}
+
 .bulletList {
   list-style: disc;
   padding-left: 36px;
@@ -235,12 +239,85 @@
   border-radius: 12px;
 }
 
+/* ── Information Architecture (text + notebook photo card) ── */
+.iaRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+}
+
+.iaText {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.iaImage {
+  display: block;
+  flex-shrink: 0;
+  width: 829px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 829 / 556;
+  border-radius: 26px;
+}
+
+/* ── Final Product (screen-by-screen breakdown) ── */
+.screenStack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.screenBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.screenImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1379 / 674;
+  border-radius: 32px;
+}
+
+/* ── Design System Decisions ── */
+.systemStack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.systemLogoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.systemImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1379 / 252;
+  border-radius: 32px;
+}
+
 @media (max-width: 1500px) {
   .title { font-size: clamp(2.25rem, 6vw, 64px); }
   .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
   .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
   .blockTitle { font-size: clamp(2.25rem, 6vw, 64px); }
   .subsectionTitle { font-size: clamp(1.5rem, 3vw, 32px); }
+  .iaRow { flex-direction: column; }
 }
 
 @media (max-width: 600px) {
