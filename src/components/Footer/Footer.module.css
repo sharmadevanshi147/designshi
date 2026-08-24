@@ -219,6 +219,9 @@
 }
 
 @media (max-width: 640px) {
+  /* Break "Devanshi Sharma" so the surname gets its own line */
+  .nameSpace { display: block; width: 0; height: 0; }
+
   .footer { padding: 56px 24px 36px; }
   .bottom { grid-template-columns: 1fr; gap: 24px; }
   .socials { align-items: flex-start; }

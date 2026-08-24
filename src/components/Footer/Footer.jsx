@@ -55,7 +55,7 @@ function BounceName() {
       {NAME.split('').map((ch, i) => (
         <motion.span
           key={i}
-          className={styles.nameLetter}
+          className={`${styles.nameLetter}${ch === ' ' ? ' ' + styles.nameSpace : ''}`}
           animate={hovered
             ? { y: [0, -10, 0], color: i % 3 === 0 ? '#EA5DB4' : i % 3 === 1 ? '#fff' : 'rgba(255,255,255,0.7)' }
             : { y: 0, color: '#fff' }

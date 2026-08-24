@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import styles from './Photobook.module.css'
 
@@ -60,6 +60,23 @@ const TILTS = [
   ['1.5deg', '-2deg', '0.5deg'],
 ]
 
+/* Below 900px the spread collapses to a single page, which changes both
+   which page turns and what it reveals. */
+function useSinglePage() {
+  const query = '(max-width: 900px)'
+  const [single, setSingle] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(query).matches
+  )
+  useEffect(() => {
+    const mq = window.matchMedia(query)
+    const onChange = e => setSingle(e.matches)
+    setSingle(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return single
+}
+
 /* Renders a page's content (beige paper background + multiple images) */
 function PageContent({ images, pageIndex }) {
   const tilts = TILTS[pageIndex % TILTS.length] || ['0deg']
@@ -84,8 +101,9 @@ export default function Photobook() {
   const [page, setPage] = useState(0)
   const [flipping, setFlipping] = useState(null)
   const shouldReduce = useReducedMotion()
+  const singlePage = useSinglePage()
 
-  const flipDuration = shouldReduce ? 50 : 1000
+  const flipDuration = shouldReduce ? 50 : singlePage ? 700 : 1000
 
   const next = () => {
     if (page >= SPREADS.length - 1 || flipping) return
@@ -124,6 +142,12 @@ export default function Photobook() {
   const rightPageIdx = page * 2 + 1
   const destLeftPageIdx = destIdx * 2
   const destRightPageIdx = destIdx * 2 + 1
+
+  /* In single-page mode the left page is the only one on screen, so it is
+     always the leaf that turns and always what gets revealed underneath. */
+  const revealLeft = !!flipping && (singlePage || flipping === 'backward')
+  const leafFrontIsRight = flipping === 'forward' && !singlePage
+  const leafBackIsRight = flipping === 'backward' && !singlePage
 
   return (
     <section className={styles.section} id="life" aria-label="Life photobook">
@@ -167,28 +191,11 @@ export default function Photobook() {
                 aria-label="Previous spread"
               >
                 <PageContent
-                  images={flipping === 'backward' ? destSpread.left : curSpread.left}
-                  pageIndex={flipping === 'backward' ? destLeftPageIdx : leftPageIdx}
+                  images={revealLeft ? destSpread.left : curSpread.left}
+                  pageIndex={revealLeft ? destLeftPageIdx : leftPageIdx}
                 />
                 <div className={styles.pageHint} aria-hidden="true">‹</div>
               </div>
-
-              {/* Backward flip overlay */}
-              {flipping === 'backward' && (
-                <div className={`${styles.flipOverlay} ${styles.flipBackward} ${shouldReduce ? styles.noAnim : ''}`}>
-                  <div className={styles.flipInner}>
-                    <div className={styles.flipFront}>
-                      <PageContent images={curSpread.left} pageIndex={leftPageIdx} />
-                    </div>
-                    <div className={styles.flipBack}>
-                      <PageContent
-                        images={SPREADS[page - 1].right}
-                        pageIndex={(page - 1) * 2 + 1}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* ── Right page slot ── */}
@@ -207,24 +214,40 @@ export default function Photobook() {
                 />
                 <div className={styles.pageHint} aria-hidden="true">›</div>
               </div>
-
-              {/* Forward flip overlay */}
-              {flipping === 'forward' && (
-                <div className={`${styles.flipOverlay} ${styles.flipForward} ${shouldReduce ? styles.noAnim : ''}`}>
-                  <div className={styles.flipInner}>
-                    <div className={styles.flipFront}>
-                      <PageContent images={curSpread.right} pageIndex={rightPageIdx} />
-                    </div>
-                    <div className={styles.flipBack}>
-                      <PageContent
-                        images={SPREADS[page + 1].left}
-                        pageIndex={(page + 1) * 2}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
+
+            {/* ── Turning leaf ── spans the whole spread so it can swing
+                across the fold instead of being clipped to one page ── */}
+            {flipping && (
+              <div
+                className={[
+                  styles.flipLayer,
+                  flipping === "forward" ? styles.layerForward : styles.layerBackward,
+                ].join(" ")}
+                aria-hidden="true"
+              >
+                <div
+                  className={[
+                    styles.flipPage,
+                    flipping === "forward" ? styles.flipForward : styles.flipBackward,
+                    shouldReduce ? styles.noAnim : "",
+                  ].join(" ")}
+                >
+                  <div className={styles.flipFront}>
+                    {leafFrontIsRight
+                      ? <PageContent images={curSpread.right} pageIndex={rightPageIdx} />
+                      : <PageContent images={curSpread.left} pageIndex={leftPageIdx} />}
+                  </div>
+                  {!singlePage && (
+                    <div className={styles.flipBack}>
+                      {leafBackIsRight
+                        ? <PageContent images={destSpread.right} pageIndex={destRightPageIdx} />
+                        : <PageContent images={destSpread.left} pageIndex={destLeftPageIdx} />}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
           </div>
         </div>

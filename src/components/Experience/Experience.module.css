@@ -246,3 +246,24 @@
   .node { left: -29px; }
   .card { padding: 22px 22px; }
 }
+
+@media (max-width: 640px) {
+  /* Header wrapped to a second line but kept its right alignment, so the meta
+     block sat ragged-right under left-aligned text. Stack it all left. */
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .meta {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+
+  /* Sit the bullet on the first line of its text rather than above it */
+  .bullet { margin-top: 0.55em; }
+}

@@ -308,3 +308,46 @@
   .socials { display: none; }
   .portraitWrap { max-width: 260px; }
 }
+
+/* ── Mobile: hero content centered in the viewport, portrait below it ── */
+@media (max-width: 480px) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 0;
+    padding: 0 20px 48px;
+  }
+
+  /* Fills the viewport so the hero content sits dead centre on load */
+  .leftCol {
+    order: 0;
+    min-height: 100svh;
+    padding-top: var(--navbar-height);
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* Portrait comes after the hero, not above it */
+  .rightCol {
+    order: 1;
+    height: auto;
+  }
+
+  .portraitWrap {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  /* Full column width, original proportions kept */
+  .portraitImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}

@@ -420,16 +420,32 @@
    RESPONSIVE
 ═══════════ */
 @media (max-width: 900px) {
+  .section { padding: 72px 24px; }
+}
+
+/* Tablet only — the phone keeps the desktop composition (see below) */
+@media (min-width: 641px) and (max-width: 900px) {
   .statCards { grid-template-columns: 1fr 1fr; }
   .chartRow { grid-template-columns: 1fr; }
   .listPanel { display: none; }
   .screenLayout { grid-template-columns: 140px 1fr; }
-  .section { padding: 72px 24px; }
 }
 
 @media (max-width: 640px) {
-  .sidebar { display: none; }
-  .screenLayout { grid-template-columns: 1fr; }
-  .statCards { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .monitorFrame { border-radius: 10px 10px 0 0; }
+  .napkinLabel { display: none; }
+
+  /* Scale the whole mockup down rather than reflowing it, so the screen keeps
+     the proportions it has on desktop instead of collapsing into a portrait
+     block. atan2/tan turns the two lengths into the unitless ratio zoom needs
+     (plain division of lengths is not); zoom, unlike transform, also shrinks
+     the layout box, so nothing below it gets pushed down. */
+  @supports (zoom: 1) {
+    .monitorWrap {
+      width: 840px;
+      max-width: none;
+      zoom: calc(tan(atan2(100vw - 48px, 840px)));
+    }
+  }
+
+  .stage { min-height: 320px; }
 }
