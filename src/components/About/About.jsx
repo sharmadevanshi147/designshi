@@ -70,8 +70,9 @@ export default function About() {
 
             <motion.div className={styles.actions} variants={pop}>
               <a
-                href="/resume.pdf"
-                download="Devanshi_Sharma_Resume.pdf"
+                href="/designshi/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.btnDownload}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"

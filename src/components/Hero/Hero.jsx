@@ -135,7 +135,7 @@ export default function Hero() {
                 <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
               </svg>
             </a>
-            <a href="mailto:devanshisharma3574@gmail.com" className={styles.ctaSecondary}>
+            <a href="mailto:designshi186@gmail.com" className={styles.ctaSecondary}>
               Get in touch
             </a>
           </motion.div>
@@ -185,7 +185,7 @@ export default function Hero() {
               <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>,
           },
           {
-            label: 'Email', href: 'mailto:devanshisharma3574@gmail.com',
+            label: 'Email', href: 'mailto:designshi186@gmail.com',
             icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="M22 7l-10 7L2 7"/></svg>,

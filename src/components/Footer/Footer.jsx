@@ -89,8 +89,8 @@ export default function Footer() {
 
         <div className={styles.contactItems}>
           <CopyItem
-            value="devanshisharma3574@gmail.com"
-            display="devanshisharma3574@gmail.com"
+            value="designshi186@gmail.com"
+            display="designshi186@gmail.com"
             icon="✉︎"
           />
         </div>

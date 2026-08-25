@@ -334,7 +334,7 @@ export default function BriefToExperience() {
           >
             <h2 className={styles.heading}>Turning Briefs to Experiences</h2>
             <p className={styles.sub}>Drop a message to work with me</p>
-            <a href="mailto:devanshisharma3574@gmail.com" className={styles.cta}>
+            <a href="mailto:designshi186@gmail.com" className={styles.cta}>
               Drop Mail ✉︎
             </a>
           </motion.div>

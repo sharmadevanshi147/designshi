@@ -82,7 +82,7 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="https://linkedin.com/in/devanshi-sharma-746470213"
+              href="/designshi/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={`${styles.link} ${styles.linkResume}`}
@@ -115,7 +115,7 @@ export default function Navbar() {
 
           {/* Contact CTA */}
           <a
-            href="mailto:devanshisharma3574@gmail.com"
+            href="mailto:designshi186@gmail.com"
             className={styles.ctaBtn}
           >
             Say hi ✉︎
