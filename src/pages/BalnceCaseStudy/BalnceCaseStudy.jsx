@@ -1,3 +1,5 @@
+import { CaseStudyBack, CaseStudyPager } from '../../components/CaseStudyNav/CaseStudyNav'
+import Footer from '../../components/Footer/Footer'
 import styles from './BalnceCaseStudy.module.css'
 
 // Hero + cover + overview + plan + information architecture + design system + final product pulled from Figma. Rest of the page still pending more of the Figma.
@@ -33,9 +35,11 @@ const PLAN_ITEMS = [
 
 export default function BalnceCaseStudy() {
   return (
+    <>
     <div className={styles.page}>
       <div className={styles.mainColumn}>
         <div className={styles.contentWrap}>
+          <CaseStudyBack />
           <div className={styles.hero}>
             <div className={styles.tagRow}>
               {TAGS.map(tag => (
@@ -124,7 +128,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.systemImage}
-                src="/designshi/Balnce/balnce-logo.svg"
+                src="/designshi/Balnce/balnce-logo.jpg"
                 alt="Balnce wordmark logo shown on dark and light backgrounds"
               />
             </div>
@@ -152,7 +156,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-auth.svg"
+                src="/designshi/Balnce/balnce-auth.jpg"
                 alt="Login and sign-up screens for the Balnce app shown on three iPhones"
               />
             </div>
@@ -166,7 +170,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-configurations.svg"
+                src="/designshi/Balnce/balnce-configurations.jpg"
                 alt="Screen-time goal and app-picker configuration screens for the Balnce app shown on two iPhones"
               />
             </div>
@@ -180,7 +184,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-permissions.svg"
+                src="/designshi/Balnce/balnce-permissions.jpg"
                 alt="App-picker screen with a background-permission system prompt for the Balnce app"
               />
             </div>
@@ -194,7 +198,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-coins.svg"
+                src="/designshi/Balnce/balnce-coins.jpg"
                 alt="Reward screen showing a gold coin earned for completing a focus session in the Balnce app"
               />
             </div>
@@ -208,7 +212,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-home.svg"
+                src="/designshi/Balnce/balnce-home.jpg"
                 alt="Home dashboard screen showing screen-time progress, points, streaks, and suggestions in the Balnce app"
               />
             </div>
@@ -222,7 +226,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-offers.svg"
+                src="/designshi/Balnce/balnce-offers.jpg"
                 alt="Personalized partner offers screen for the Balnce app"
               />
             </div>
@@ -236,7 +240,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-profile.svg"
+                src="/designshi/Balnce/balnce-profile.jpg"
                 alt="User profile and settings screen for the Balnce app"
               />
             </div>
@@ -250,7 +254,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-rewards.svg"
+                src="/designshi/Balnce/balnce-rewards.jpg"
                 alt="Rewards hub screen showing redeemable partner offers for the Balnce app"
               />
             </div>
@@ -264,7 +268,7 @@ export default function BalnceCaseStudy() {
               </div>
               <img
                 className={styles.screenImage}
-                src="/designshi/Balnce/balnce-analytics.svg"
+                src="/designshi/Balnce/balnce-analytics.jpg"
                 alt="Weekly screen-time analytics and app usage breakdown screen for the Balnce app"
               />
             </div>
@@ -296,7 +300,11 @@ export default function BalnceCaseStudy() {
             </p>
           </div>
         </section>
+      <CaseStudyPager slug="balnce" />
       </div>
     </div>
+
+    <Footer />
+    </>
   )
 }

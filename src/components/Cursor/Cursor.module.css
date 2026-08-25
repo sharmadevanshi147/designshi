@@ -23,3 +23,42 @@
   animation: sparkle-rise 0.65s var(--ease-expo) forwards;
   will-change: transform, opacity;
 }
+
+/* ── Label cursor ── the pointer becomes a glass pill ──
+   Outer element is translated to the pointer; the pill centres itself on it. */
+.labelCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+/* Dark glass: the project cards are fixed pastel colours in both themes,
+   so a translucent dark fill with white text stays legible on all of them. */
+.labelPill {
+  display: block;
+  white-space: nowrap;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: rgba(21, 21, 22, 0.55);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transform: translate(-50%, -50%);
+  animation: label-pop 0.22s var(--ease-expo) forwards;
+}
+
+@keyframes label-pop {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.82); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}

@@ -28,10 +28,11 @@ function useFinePointer() {
 }
 
 export default function Cursor() {
-  const { mode } = useCursor()
+  const { mode, label } = useCursor()
   const finePointer = useFinePointer()
   const cursorRef = useRef(null)
   const dotRef    = useRef(null)
+  const labelRef  = useRef(null)
   const [sparkles, setSparkles] = useState([])
   const posRef    = useRef({ x: -200, y: -200 })
   const lastSparkle = useRef(0)
@@ -51,9 +52,12 @@ export default function Cursor() {
       if (dotRef.current) {
         dotRef.current.style.transform = `translate(${x}px, ${y}px)`
       }
+      if (labelRef.current) {
+        labelRef.current.style.transform = `translate(${x}px, ${y}px)`
+      }
 
       /* Spawn sparkles only in pencil mode, throttled to 60ms */
-      if (mode === 'pencil') {
+      if (mode === 'pencil' && !label) {
         const now = Date.now()
         if (now - lastSparkle.current > 55) {
           lastSparkle.current = now
@@ -70,9 +74,25 @@ export default function Cursor() {
     }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
-  }, [mode, finePointer])
+  }, [mode, finePointer, label])
+
+  useEffect(() => {
+    if (label && labelRef.current) {
+      const { x, y } = posRef.current
+      labelRef.current.style.transform = `translate(${x}px, ${y}px)`
+    }
+  }, [label])
 
   if (mode !== 'pencil' || !finePointer) return null
+
+  /* Hovering something that declared a label — become that label */
+  if (label) {
+    return (
+      <div ref={labelRef} className={styles.labelCursor} aria-hidden="true">
+        <span className={styles.labelPill}>{label}</span>
+      </div>
+    )
+  }
 
   return (
     <>

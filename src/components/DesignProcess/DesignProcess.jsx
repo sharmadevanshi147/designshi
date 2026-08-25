@@ -79,14 +79,6 @@ export default function DesignProcess() {
 
       {/* Header */}
       <div className={styles.header}>
-        <motion.p
-          className={styles.eyebrow}
-          initial={shouldReduce ? false : { opacity: 0, y: 16 }}
-          animate={inView || shouldReduce ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EXPO }}
-        >
-          How I work
-        </motion.p>
         <motion.h2
           className={styles.heading}
           initial={shouldReduce ? false : { opacity: 0, y: 24 }}

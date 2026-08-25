@@ -304,7 +304,6 @@ export default function BriefToExperience() {
               </div>
               {/* corner fold */}
               <div className={styles.cornerFold} aria-hidden="true" />
-              <div className={styles.napkinLabel}>Brief sketch</div>
             </motion.div>
           )}
 

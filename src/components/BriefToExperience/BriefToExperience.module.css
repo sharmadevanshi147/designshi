@@ -84,17 +84,6 @@
   background: linear-gradient(135deg, transparent 50%, rgba(220,210,190,0.4) 50%);
 }
 
-.napkinLabel {
-  position: absolute;
-  top: -28px;
-  left: 0;
-  font-family: var(--font-plex, 'DM Sans', sans-serif);
-  font-size: 0.75rem;
-  font-style: italic;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.04em;
-}
-
 /* ════════════════════════
    MONITOR
 ════════════════════════ */
@@ -432,8 +421,6 @@
 }
 
 @media (max-width: 640px) {
-  .napkinLabel { display: none; }
-
   /* Scale the whole mockup down rather than reflowing it, so the screen keeps
      the proportions it has on desktop instead of collapsing into a portrait
      block. atan2/tan turns the two lengths into the unitless ratio zoom needs

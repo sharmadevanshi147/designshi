@@ -1,3 +1,5 @@
+import { CaseStudyBack, CaseStudyPager } from '../../components/CaseStudyNav/CaseStudyNav'
+import Footer from '../../components/Footer/Footer'
 import styles from './GoodreadsCaseStudy.module.css'
 
 const TAGS = ['Case Study', 'UX Design', 'Product Thinking', 'Design Thinking']
@@ -105,9 +107,11 @@ const HEURISTIC_CARDS = [
 
 export default function GoodreadsCaseStudy() {
   return (
+    <>
     <div className={styles.page}>
       <div className={styles.mainColumn}>
         <div className={styles.contentWrap}>
+          <CaseStudyBack />
           <div className={styles.hero}>
             <div className={styles.tagRow}>
               {TAGS.map(tag => (
@@ -357,7 +361,11 @@ export default function GoodreadsCaseStudy() {
             </p>
           </div>
         </section>
+      <CaseStudyPager slug="goodreads" />
       </div>
     </div>
+
+    <Footer />
+    </>
   )
 }

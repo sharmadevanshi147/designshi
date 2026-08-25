@@ -167,7 +167,7 @@
   color: #fff;
   transform: translateY(-3px) scale(1.03);
   gap: 14px;
-  box-shadow: 0 8px 24px rgba(234, 93, 180, 0.35);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 35%, transparent);
 }
 
 .ctaSecondary {
@@ -182,7 +182,12 @@
   font-weight: 500;
   transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
-.ctaSecondary:hover { border-color: var(--color-ink-30); background: #FFF8EE; color: var(--color-ink); transform: translateY(-2px); }
+.ctaSecondary:hover {
+  border-color: var(--color-ink-50);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  transform: translateY(-2px);
+}
 
 /* Note */
 .note {

@@ -1,7 +1,12 @@
 .page {
   min-height: 100vh;
-  background: #FFFFFF;
-  color: #000000;
+  /* Case-study brand tint. Kept across both themes for identity, with a
+     dark variant below so the label stays legible. */
+  --cs-tag-bg: #EFECFF;
+  --cs-tag-border: #E5D7FC;
+  --cs-tag-ink: #0C0C0C;
+  background: var(--color-bg);
+  color: var(--color-ink);
   padding: 120px 64px;
 }
 
@@ -34,7 +39,8 @@
 .tagRow {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-self: flex-start;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 8px;
 }
@@ -45,9 +51,9 @@
   font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0;
-  color: #0C0C0C;
-  background: #EFECFF;
-  border: 0.5px solid #E5D7FC;
+  color: var(--cs-tag-ink);
+  background: var(--cs-tag-bg);
+  border: 0.5px solid var(--cs-tag-border);
   border-radius: 4px;
   padding: 4px;
   text-align: center;
@@ -66,11 +72,11 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 64px;
+  font-size: clamp(2rem, 4vw, 48px);
   line-height: 1.2;
   letter-spacing: -0.64px;
-  color: #000000;
-  text-align: center;
+  color: var(--color-ink);
+  text-align: left;
   width: 100%;
   margin: 0;
 }
@@ -78,11 +84,11 @@
 .subtitle {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  font-size: 32px;
+  font-size: 18px;
   line-height: normal;
   letter-spacing: 0;
-  color: #394147;
-  text-align: center;
+  color: var(--color-ink-70);
+  text-align: left;
   width: 100%;
   margin: 0;
 }
@@ -98,13 +104,15 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1359 / 800;
-  border-radius: 32px;
+  /* No border-radius: the SVG already rounds itself (rx=32 in a 1359-wide
+     canvas) and strokes its own dashed outline. A fixed 32px CSS radius does
+     not scale with the artwork, so it clipped the dashed corners. */
 }
 
 .coverPlaceholderLabel {
   font-family: 'DM Mono', monospace;
   font-size: 14px;
-  color: rgba(12, 12, 12, 0.4);
+  color: var(--color-ink-50);
 }
 
 /* ── Section heading + block patterns (shared with other case studies) ── */
@@ -120,10 +128,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 48px;
+  font-size: clamp(1.5rem, 3vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.48px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0;
 }
@@ -140,10 +148,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 48px;
+  font-size: clamp(1.5rem, 3vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.48px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0;
 }
@@ -165,10 +173,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 32px;
+  font-size: clamp(1.25rem, 2.2vw, 26px);
   line-height: 1.2;
   letter-spacing: -0.32px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0 0 8px 0;
 }
@@ -178,7 +186,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: normal;
-  color: #394147;
+  color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
 }
@@ -192,7 +200,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: normal;
-  color: #394147;
+  color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
 }
@@ -234,8 +242,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFF8FA;
-  border: 1px dashed rgba(0, 0, 0, 0.3);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-ink-30);
   border-radius: 12px;
 }
 
@@ -262,7 +270,7 @@
   max-width: 100%;
   height: auto;
   aspect-ratio: 829 / 556;
-  border-radius: 26px;
+  /* Same as .coverImage — this SVG carries its own corner and dashed outline. */
 }
 
 /* ── Final Product (screen-by-screen breakdown) ── */
@@ -286,6 +294,10 @@
   height: auto;
   aspect-ratio: 1379 / 674;
   border-radius: 32px;
+  /* Dashed outline per the Figma spec (1px, inside). Uses the ink token so it
+     stays visible in dark mode — a hardcoded black would vanish there. */
+  border: 1px dashed var(--color-ink-30);
+  box-sizing: border-box;
 }
 
 /* ── Design System Decisions ── */
@@ -309,14 +321,13 @@
   height: auto;
   aspect-ratio: 1379 / 252;
   border-radius: 32px;
+  /* Dashed outline per the Figma spec (1px, inside). Uses the ink token so it
+     stays visible in dark mode — a hardcoded black would vanish there. */
+  border: 1px dashed var(--color-ink-30);
+  box-sizing: border-box;
 }
 
 @media (max-width: 1500px) {
-  .title { font-size: clamp(2.25rem, 6vw, 64px); }
-  .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
-  .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
-  .blockTitle { font-size: clamp(1.75rem, 4vw, 48px); }
-  .subsectionTitle { font-size: clamp(1.5rem, 3vw, 32px); }
   .iaRow { flex-direction: column; }
 }
 
@@ -324,4 +335,22 @@
   .page { padding: 80px 24px; }
   .contentWrap { padding: 6px; gap: 32px; }
   .mainColumn { gap: 40px; }
+}
+
+/* Dark theme: keep the brand hue but as a translucent tint on a dark ground */
+:root[data-theme="dark"] .page {
+  --cs-tag-bg: rgba(178, 168, 255, 0.16);
+  --cs-tag-border: rgba(178, 168, 255, 0.38);
+  --cs-tag-ink: #E4E0FF;
+}
+
+/*
+  .screenImage now carries a CSS radius + dashed border for the raster screens.
+  The remaining SVG in that slot (the homescreen widget) already draws both
+  itself, so exclude it — otherwise it gets a doubled outline and its own
+  dashed corners get clipped by the CSS radius.
+*/
+.screenImage[src$=".svg"] {
+  border: none;
+  border-radius: 0;
 }

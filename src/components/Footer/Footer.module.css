@@ -228,3 +228,48 @@
   .copyright { flex-direction: column; gap: 8px; text-align: center; }
   .copyValue { font-size: 0.8125rem; }
 }
+
+/* ── Flower kitty sticker ──
+   Anchored to the name rather than the footer corner. The wrapper is
+   inline-block so it hugs the real text width; .contact centres it, so the
+   sticker can hang off the last letter instead of the page edge. */
+.nameAnchor {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.nameAnchor .contactHeading {
+  margin-bottom: 0;
+}
+
+.kittySticker {
+  position: absolute;
+  /* Vertically centred on the name, tucked just past its final letter.
+     Absolute, so it claims no vertical space. */
+  top: 50%;
+  /* Starts past the wrapper edge, so it never sits on the letters */
+  left: calc(100% + 12px);
+  width: clamp(76px, 11vw, 150px);
+  height: auto;
+  transform: translateY(-50%) rotate(7deg);
+  pointer-events: none;
+  user-select: none;
+  /* In front of the name (in-flow text would otherwise paint over it) */
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .kittySticker { width: 104px; left: calc(100% + 8px); }
+}
+
+@media (max-width: 640px) {
+  /* Name breaks to two lines here, so sit the sticker on the upper line */
+  .kittySticker {
+    width: 72px;
+    /* Name breaks to two lines here — sit level with the second one ("Sharma"),
+       not the first. 75% of the two-line box is the lower line's centre. */
+    top: 75%;
+    left: calc(100% + 6px);
+  }
+}

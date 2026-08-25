@@ -1,3 +1,5 @@
+import { CaseStudyBack, CaseStudyPager } from '../../components/CaseStudyNav/CaseStudyNav'
+import Footer from '../../components/Footer/Footer'
 import styles from './FoldHealthCaseStudy.module.css'
 
 const TAGS = ['Case Study', 'Healthcare', 'Enterprise UX', 'Product Design']
@@ -21,7 +23,7 @@ const KEY_WORKS = [
       "On the provider side, we designed an Insurance ID Definition workflow that included a live preview of the insurance card as administrators configured its contents. The interface supported multiple branded themes tailored to each client's visual identity, along with predefined themes for Third-Party Administrators (TPAs).",
       "On the patient side, the experience surfaced digital insurance IDs within the My Insurance IDs section of the Fold Patient App, allowing subscribers and their dependents to easily access their insurance cards whenever required.",
     ],
-    src: '/designshi/FoldHealth/foldhealth-key-work-1.svg',
+    src: '/designshi/FoldHealth/foldhealth-key-work-1.png',
   },
   {
     title: 'Simplifying Implementation - Teams Creation and Workflow Cloning',
@@ -31,7 +33,7 @@ const KEY_WORKS = [
       "We also introduced a Clone Configuration feature for module access controls. Since many administrators required identical permission sets, users could duplicate an existing configuration and update only the assigned administrator instead of recreating the entire setup from scratch.",
       "Together, these improvements streamlined one of the most repetitive implementation workflows, saving hours of manual effort, reducing configuration time, and minimizing the risk of human error.",
     ],
-    src: '/designshi/FoldHealth/foldhealth-key-work-2.svg',
+    src: '/designshi/FoldHealth/foldhealth-key-work-2.png',
   },
   {
     title: 'AI facilitated Clinical Workflows',
@@ -40,14 +42,14 @@ const KEY_WORKS = [
       "To solve this, I spent time understanding how each program functioned operationally, understood the story of a patient enrolled in a program and a provider using the program how providers made decisions, and where AI could meaningfully reduce friction. I contributed to AI facilitation of these clinical workflows as well like providing a patient's chart synopsis with cites of each resource used for the synopsis. The goal was to ensure clinicians were presented with the right information, recommendations, and actions at the appropriate stage of the workflow while keeping the experience intuitive and configurable for different organizations.",
       "As our engineering teams began adopting AI-assisted development, I also started providing Claude Code with repository context, functional prototypes, and structured documentation alongside implementation tickets. This gave AI better context for generating code and reduced ambiguity during development. The result was a set of clinical workflows that were easier for providers to use, easier for engineers to implement, and better suited for future AI-assisted enhancements.",
     ],
-    src: '/designshi/FoldHealth/foldhealth-key-work-3.svg',
+    src: '/designshi/FoldHealth/foldhealth-key-work-3.png',
   },
   {
     title: 'Operational Workflows and Analytics',
     desc: [
       "As the platform grew, many operational workflows became highly configurable to support different healthcare organizations. Features like milestone configuration, resource management, consent handling, queue management, workflow cloning, Teams-based user assignment, communication preferences and sub workflows coming under program steps . For accurate data driver decisions facilitation for our clients, We also presented several analytics reports and worked to create Data backed UX Driven Reports for them.",
     ],
-    src: '/designshi/FoldHealth/foldhealth-key-work-4.svg',
+    src: '/designshi/FoldHealth/foldhealth-key-work-4.png',
   },
 ]
 
@@ -59,9 +61,11 @@ const PROCESS_PARAGRAPHS = [
 
 export default function FoldHealthCaseStudy() {
   return (
+    <>
     <div className={styles.page}>
       <div className={styles.mainColumn}>
         <div className={styles.contentWrap}>
+          <CaseStudyBack />
           <div className={styles.hero}>
             <div className={styles.tagRow}>
               {TAGS.map(tag => (
@@ -82,7 +86,7 @@ export default function FoldHealthCaseStudy() {
           <div className={styles.coverFrame}>
             <img
               className={styles.coverImage}
-              src="/designshi/FoldHealth/foldhealth-cover.svg"
+              src="/designshi/FoldHealth/foldhealth-cover.png"
               alt="FoldHealth product illustration: care plan tracking, patient status, and automation flow around a provider"
             />
           </div>
@@ -124,13 +128,17 @@ export default function FoldHealthCaseStudy() {
                       <p key={p} className={styles.body}>{p}</p>
                     ))}
                   </div>
-                  <img className={styles.keyWorkImage} src={work.src} alt={`${work.title} screens`} />
+                  <img className={styles.keyWorkImage} src={work.src} alt={`${work.title} screens`} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
           </div>
         </section>
+      <CaseStudyPager slug="foldhealth" />
       </div>
     </div>
+
+    <Footer />
+    </>
   )
 }

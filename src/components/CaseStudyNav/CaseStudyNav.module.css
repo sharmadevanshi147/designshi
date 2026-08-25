@@ -1,0 +1,108 @@
+/* ── Back to work ── */
+.back {
+  /* .contentWrap is a centred flex column, so opt out to sit at the left edge */
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px 9px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-ink-30);
+  color: var(--color-ink-70);
+  font-family: var(--font-dm, var(--font-body));
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, gap 0.2s;
+}
+
+.back:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+  background: var(--color-surface);
+  gap: 12px;
+}
+
+.back:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* ── Previous / next pager ── */
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-ink-10);
+}
+
+.pagerLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 20px 22px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-ink-10);
+  background: var(--color-surface);
+  color: var(--color-ink-70);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Push the next card's content to the right so the two mirror each other */
+.pagerNext {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.pagerLink:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink-30);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-float);
+}
+
+.pagerLink:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.pagerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pagerLabel {
+  font-family: var(--font-dm, var(--font-body));
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-70);
+}
+
+.pagerTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .pager {
+    margin-top: 64px;
+    gap: 10px;
+  }
+
+  /* Arrows and titles both still fit at this width, but the padding cannot */
+  .pagerLink { padding: 14px 14px; gap: 10px; }
+  .pagerTitle { font-size: 1rem; }
+}

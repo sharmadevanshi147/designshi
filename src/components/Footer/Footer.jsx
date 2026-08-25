@@ -81,11 +81,22 @@ export default function Footer() {
 
       {/* ── Contact block ── */}
       <div className={styles.contact}>
+
         <p className={styles.contactEyebrow}>
           Thanks for taking a sneak peek into my work, leave a message to explore the canvas with me.
         </p>
 
-        <BounceName />
+        <span className={styles.nameAnchor}>
+          <BounceName />
+          {/* Sticker: absolute, so it still claims no vertical space */}
+          <img
+            src="/designshi/flower-kitty.svg"
+            alt=""
+            aria-hidden="true"
+            className={styles.kittySticker}
+            loading="lazy"
+          />
+        </span>
 
         <div className={styles.contactItems}>
           <CopyItem

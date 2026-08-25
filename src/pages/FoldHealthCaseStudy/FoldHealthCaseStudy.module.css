@@ -1,7 +1,12 @@
 .page {
   min-height: 100vh;
-  background: #FFFFFF;
-  color: #000000;
+  /* Case-study brand tint. Kept across both themes for identity, with a
+     dark variant below so the label stays legible. */
+  --cs-tag-bg: #F6ECFF;
+  --cs-tag-border: #EED7FC;
+  --cs-tag-ink: #0C0C0C;
+  background: var(--color-bg);
+  color: var(--color-ink);
   padding: 120px 64px;
 }
 
@@ -34,7 +39,8 @@
 .tagRow {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-self: flex-start;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 8px;
 }
@@ -45,9 +51,9 @@
   font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0;
-  color: #0C0C0C;
-  background: #F6ECFF;
-  border: 0.5px solid #EED7FC;
+  color: var(--cs-tag-ink);
+  background: var(--cs-tag-bg);
+  border: 0.5px solid var(--cs-tag-border);
   border-radius: 4px;
   padding: 4px;
   text-align: center;
@@ -66,11 +72,11 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 64px;
+  font-size: clamp(2rem, 4vw, 48px);
   line-height: 1.2;
   letter-spacing: -0.64px;
-  color: #000000;
-  text-align: center;
+  color: var(--color-ink);
+  text-align: left;
   width: 100%;
   margin: 0;
 }
@@ -78,11 +84,11 @@
 .subtitle {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  font-size: 32px;
+  font-size: 18px;
   line-height: normal;
   letter-spacing: 0;
-  color: #394147;
-  text-align: center;
+  color: var(--color-ink-70);
+  text-align: left;
   width: 100%;
   margin: 0;
 }
@@ -97,7 +103,6 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 32px;
 }
 
 /* ── Section heading + block patterns (shared with other case studies) ── */
@@ -113,10 +118,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 48px;
+  font-size: clamp(1.5rem, 3vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.48px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0;
 }
@@ -133,10 +138,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 48px;
+  font-size: clamp(1.5rem, 3vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.48px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0;
 }
@@ -158,10 +163,10 @@
   font-family: 'Fraunces', serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
-  font-size: 32px;
+  font-size: clamp(1.25rem, 2.2vw, 26px);
   line-height: 1.2;
   letter-spacing: -0.32px;
-  color: #000000;
+  color: var(--color-ink);
   width: 100%;
   margin: 0 0 8px 0;
 }
@@ -171,7 +176,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: normal;
-  color: #394147;
+  color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
 }
@@ -212,15 +217,17 @@
 }
 
 @media (max-width: 1500px) {
-  .title { font-size: clamp(2.25rem, 6vw, 64px); }
-  .subtitle { font-size: clamp(1.125rem, 2.5vw, 32px); }
-  .sectionTitle { font-size: clamp(1.75rem, 4vw, 48px); }
-  .blockTitle { font-size: clamp(1.75rem, 4vw, 48px); }
-  .subsectionTitle { font-size: clamp(1.5rem, 3vw, 32px); }
 }
 
 @media (max-width: 600px) {
   .page { padding: 80px 24px; }
   .contentWrap { padding: 6px; gap: 32px; }
   .mainColumn { gap: 40px; }
+}
+
+/* Dark theme: keep the brand hue but as a translucent tint on a dark ground */
+:root[data-theme="dark"] .page {
+  --cs-tag-bg: rgba(200, 163, 255, 0.16);
+  --cs-tag-border: rgba(200, 163, 255, 0.38);
+  --cs-tag-ink: #E9DDFF;
 }

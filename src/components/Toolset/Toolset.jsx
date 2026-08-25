@@ -129,15 +129,6 @@ export default function Toolset() {
 
       {/* Header */}
       <div className={styles.header}>
-        <motion.p
-          className={styles.eyebrow}
-          initial={shouldReduce ? false : { opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-10%' }}
-          transition={{ duration: 0.6, ease: EXPO }}
-        >
-          What I work with
-        </motion.p>
         <motion.h2
           className={styles.heading}
           initial={shouldReduce ? false : { opacity: 0, y: 24 }}

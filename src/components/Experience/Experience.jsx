@@ -9,13 +9,18 @@ const JOBS = [
     company: 'Fold Health',
     role: 'Product UX Designer',
     period: 'Oct 2024 – Present',
-    location: 'Remote',
+    location: 'Onsite · Pune, Maharashtra, India',
     tag: 'Current',
     color: 'var(--color-accent)',
     highlights: [
-      'Expanded design system with new components & layout templates',
-      'Conducted UX audits on 8+ core workflows, identifying 50+ usability issues',
-      'Handled White-label platform reviews with major clients',
+      'Shipped 10+ workflows as AI-based React frontend code, saving time in the SDLC',
+      'Expanded the design system with multiple components & layout templates for faster delivery',
+      'Ran heuristic UX audits across 8+ modules, raising, tracking & addressing 200+ UX bugs',
+      'Revamped onboarding & implementation workflows, cutting up to 70% of feature configuration time',
+      'Worked with Analytics UX on the creation of 5+ reports',
+      'Contributed to provider workflows managing more than 1M lives',
+      'Handled white-labelling platform reviews & conversations with major clients',
+      'Redesigned patient care modules, 25+ end-to-end support workflows & 50+ enhancements, including AI agent workflows and a patient-facing electronic insurance ID',
     ],
   },
   {
@@ -25,9 +30,9 @@ const JOBS = [
     location: 'Hybrid',
     color: '#2A9D8F',
     highlights: [
-      'User research with 20+ participants to guide wireframing & prototyping',
-      'Created 100+ intuitive, engaging interfaces through iterative design',
-      'Aligned design strategy with business objectives',
+      'Conducted user research with over 20 participants, guiding wireframing & prototype development',
+      'Created 100+ intuitive, engaging interfaces through iterative design & usability testing',
+      'Aligned design strategy with business objectives for seamless, effective user interactions',
     ],
   },
   {
@@ -37,9 +42,8 @@ const JOBS = [
     location: 'Remote',
     color: '#F59E0B',
     highlights: [
-      'Led website development, created 15+ pages incorporating client feedback',
-      'Established cohesive design system ensuring visual consistency',
-      'Achieved seamless usability through rigorous testing & iteration',
+      'Directed website development, creating 15+ pages from client feedback with consistent branding',
+      'Established a cohesive design system, cutting design time & improving visual consistency',
     ],
   },
   {
@@ -49,9 +53,8 @@ const JOBS = [
     location: 'Remote',
     color: '#10B981',
     highlights: [
-      'Conducted UI testing on 30+ screens for functionality & usability',
-      'Crafted user-centric UX with streamlined flows and visual layouts',
-      'Collaborated on cohesive, consistent interfaces',
+      'Conducted UI testing on 30+ screens to ensure functionality & enhance usability',
+      'Crafted user-centric UX with a streamlined flow & visually appealing layouts to boost engagement',
     ],
   },
 ]
@@ -65,7 +68,6 @@ export default function Experience() {
     <section ref={ref} className={styles.section} id="experience" aria-label="Work experience">
 
       <div className={styles.header}>
-        <p className={styles.eyebrow}>Where I've been</p>
         <h2 className={styles.heading}>Experience</h2>
       </div>
 
@@ -151,6 +153,10 @@ export default function Experience() {
           <p className={styles.extraLabel}>Leadership</p>
           <p className={styles.extraMain}>President — Swaas Eco-Tech Society</p>
           <p className={styles.extraSub}>GTBIT · 2022–23</p>
+          <p className={`${styles.extraSub} ${styles.extraNote}`}>
+            Secured a Bisleri <em>Bottles for Change</em> collaboration, cutting the
+            society&rsquo;s carbon footprint by over 100&nbsp;kg of plastic
+          </p>
           <p className={styles.extraMain} style={{ marginTop: 12 }}>General Secretary — IEEE CS Chapter</p>
           <p className={styles.extraSub}>Mentored 30+ students in UX · 2023–24</p>
         </div>

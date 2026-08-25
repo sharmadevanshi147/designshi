@@ -4,6 +4,8 @@ const CursorCtx = createContext(null)
 
 export function CursorProvider({ children }) {
   const [mode, setMode] = useState('pencil') // magic cursor on by default
+  /* When set, the cursor becomes this label instead of the pencil */
+  const [label, setLabel] = useState(null)
 
   /* Set body attribute on mount */
   useEffect(() => {
@@ -19,7 +21,7 @@ export function CursorProvider({ children }) {
   }, [])
 
   return (
-    <CursorCtx.Provider value={{ mode, toggleCursor }}>
+    <CursorCtx.Provider value={{ mode, toggleCursor, label, setLabel }}>
       {children}
     </CursorCtx.Provider>
   )

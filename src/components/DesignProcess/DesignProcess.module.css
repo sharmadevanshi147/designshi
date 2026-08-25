@@ -11,15 +11,6 @@
   padding: 0 60px;
 }
 
-.eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--color-ink-30);
-  margin-bottom: 10px;
-}
-
 .heading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
