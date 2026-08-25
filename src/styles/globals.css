@@ -34,8 +34,12 @@ body {
 }
 
 /* ─── Custom cursor states ─── */
-body[data-cursor="pencil"] {
-  cursor: none;
+/* Guarded: only hide the native cursor where we actually draw a replacement.
+   On touch devices the pencil is not rendered at all. */
+@media (hover: hover) and (pointer: fine) {
+  body[data-cursor="pencil"] {
+    cursor: none;
+  }
 }
 
 img, video {

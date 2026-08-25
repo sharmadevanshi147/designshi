@@ -8,8 +8,28 @@ const COLORS = ['#EA5DB4','#7C6EFF','#F59E0B','#10B981','#F87171','#60A5FA','#A7
 
 let sparkleId = 0
 
+/* Only real pointing devices get a magic cursor. Phones and tablets have no
+   cursor to replace, and their taps emit synthetic mousemove events that would
+   otherwise leave a stray pencil and sparkles stuck on screen. */
+const FINE_POINTER = "(hover: hover) and (pointer: fine)"
+
+function useFinePointer() {
+  const [fine, setFine] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(FINE_POINTER).matches
+  )
+  useEffect(() => {
+    const mq = window.matchMedia(FINE_POINTER)
+    const onChange = e => setFine(e.matches)
+    setFine(mq.matches)
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+  return fine
+}
+
 export default function Cursor() {
   const { mode } = useCursor()
+  const finePointer = useFinePointer()
   const cursorRef = useRef(null)
   const dotRef    = useRef(null)
   const [sparkles, setSparkles] = useState([])
@@ -18,6 +38,8 @@ export default function Cursor() {
 
   /* ── Move cursor ── */
   useEffect(() => {
+    if (!finePointer) return
+
     const move = (e) => {
       const x = e.clientX
       const y = e.clientY
@@ -48,9 +70,9 @@ export default function Cursor() {
     }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
-  }, [mode])
+  }, [mode, finePointer])
 
-  if (mode !== 'pencil') return null
+  if (mode !== 'pencil' || !finePointer) return null
 
   return (
     <>
