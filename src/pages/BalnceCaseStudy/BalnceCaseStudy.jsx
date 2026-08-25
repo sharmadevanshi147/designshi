@@ -87,8 +87,8 @@ export default function BalnceCaseStudy() {
           <div className={styles.subsection}>
             <p className={styles.bodyStrong}>{PLAN_INTRO}</p>
             {PLAN_ITEMS.map(item => (
-              <div key={item.label}>
-                <p className={styles.body}>{item.label}</p>
+              <div key={item.label} className={styles.planItem}>
+                <p className={styles.planLabel}>{item.label}</p>
                 <p className={styles.body}>{item.body}</p>
               </div>
             ))}
@@ -96,13 +96,11 @@ export default function BalnceCaseStudy() {
         </section>
 
         <section className={styles.section}>
-          <div className={styles.iaRow}>
-            <div className={styles.iaText}>
-              <h3 className={styles.subsectionTitle}>Information Architecture</h3>
-              <p className={styles.body}>
-                This notebook page is exactly how the product began. In the middle of the hackathon, ideas moved faster than design tools, so the entire information architecture was mapped on paper before evolving into the final product. I've kept it here because it reflects the thinking process, not just the outcome.
-              </p>
-            </div>
+          <h2 className={styles.blockTitle}>Information Architecture</h2>
+          <div className={styles.systemStack}>
+            <p className={styles.body}>
+              This notebook page is exactly how the product began. In the middle of the hackathon, ideas moved faster than design tools, so the entire information architecture was mapped on paper before evolving into the final product. I've kept it here because it reflects the thinking process, not just the outcome.
+            </p>
             <img
               className={styles.iaImage}
               src="/designshi/Balnce/balnce-ia.svg"

@@ -23,7 +23,7 @@
 .heading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-size: var(--size-section-title);
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;
@@ -33,9 +33,9 @@
 }
 
 .sub {
-  font-family: var(--font-serif);
+  font-family: var(--font-dm);
   font-style: normal;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--color-ink-50);
   max-width: 480px;
   margin: 0 auto;

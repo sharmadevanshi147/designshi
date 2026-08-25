@@ -15,7 +15,7 @@
 .heading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  font-size: var(--size-section-title);
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;

@@ -54,7 +54,7 @@
 .sectionHeading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: var(--size-section-title);
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;
@@ -176,4 +176,14 @@
   .about { padding: calc(var(--navbar-height) + 28px) 20px 28px; }
   .card { padding: 52px 28px 44px; border-radius: 18px; }
   .sectionHeading { font-size: clamp(2.5rem, 10vw, 3rem); }
+}
+
+/* ── 14" laptops (~700-820px usable height) ──
+   The card needs 815px here; forcing 100svh clipped it at the bottom.
+   Release the lock and let the section size to its content instead. */
+@media (max-height: 820px) {
+  .about {
+    min-height: 0;
+    padding: calc(var(--navbar-height) + 32px) 60px 56px;
+  }
 }

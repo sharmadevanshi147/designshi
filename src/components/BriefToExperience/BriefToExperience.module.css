@@ -371,7 +371,7 @@
 .heading {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-size: var(--size-section-title);
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;
@@ -435,4 +435,14 @@
   }
 
   .stage { min-height: 320px; }
+}
+
+/* ── 14" laptops — see About.module.css. Content needs 723px before padding,
+   so 96px top and bottom pushed this well past a short viewport. */
+@media (max-height: 820px) {
+  .section {
+    min-height: 0;
+    padding: 56px 60px;
+    gap: 40px;
+  }
 }

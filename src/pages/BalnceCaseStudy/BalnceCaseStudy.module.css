@@ -85,7 +85,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 18px;
-  line-height: normal;
+  line-height: 1.55;
   letter-spacing: 0;
   color: var(--color-ink-70);
   text-align: left;
@@ -155,6 +155,11 @@
   width: 100%;
   margin: 0;
 }
+/* An intro line belongs to the heading above it, so pull it back from the
+   section's 24px gap to the 8px used elsewhere for title-to-content. */
+.blockTitle + .body {
+  margin-top: -16px;
+}
 
 .bigBlockImage {
   display: block;
@@ -185,7 +190,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
@@ -199,10 +204,31 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
+}
+
+/* ── Plan: Problem / Process / Product / Impact ── */
+/* Each label binds tightly to its own paragraph, with a wider gap
+   separating one group from the next. */
+.planItem {
+  width: 100%;
+}
+
+.planItem + .planItem {
+  margin-top: 28px;
+}
+
+.planLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: normal;
+  color: var(--color-ink);
+  width: 100%;
+  margin: 0 0 6px 0;
 }
 
 .bulletList {
@@ -248,26 +274,9 @@
 }
 
 /* ── Information Architecture (text + notebook photo card) ── */
-.iaRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 32px;
-  width: 100%;
-}
-
-.iaText {
-  flex: 1 0 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .iaImage {
   display: block;
-  flex-shrink: 0;
-  width: 829px;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   aspect-ratio: 829 / 556;
   /* Same as .coverImage — this SVG carries its own corner and dashed outline. */
@@ -327,10 +336,6 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 1500px) {
-  .iaRow { flex-direction: column; }
-}
-
 @media (max-width: 600px) {
   .page { padding: 80px 24px; }
   .contentWrap { padding: 6px; gap: 32px; }
@@ -353,4 +358,11 @@
 .screenImage[src$=".svg"] {
   border: none;
   border-radius: 0;
+}
+
+/* ── 14" laptops — 120px of vertical page padding is ~17% of a 720px
+   viewport. Trim it so the case study starts closer to the fold. */
+@media (max-height: 820px) {
+  .page { padding: 88px 64px; }
+  .mainColumn { gap: 48px; }
 }

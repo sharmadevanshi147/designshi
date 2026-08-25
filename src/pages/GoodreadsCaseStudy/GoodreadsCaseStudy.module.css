@@ -86,7 +86,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 18px;
-  line-height: normal;
+  line-height: 1.55;
   letter-spacing: 0;
   color: var(--color-ink-70);
   text-align: left;
@@ -152,7 +152,7 @@
   font-variation-settings: "opsz" 16;
   font-weight: 300;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
@@ -186,7 +186,7 @@
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 400;
   font-size: 18px;
-  line-height: normal;
+  line-height: 1.55;
   color: var(--color-ink);
   width: 100%;
   margin: 0;
@@ -211,7 +211,7 @@
 .problemBodyBold {
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   margin: 0 0 16px 0;
 }
@@ -265,7 +265,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0;
@@ -280,10 +280,14 @@
 }
 
 .heuristicImage {
+  /* Auto on both axes so the box hugs the artwork. A fixed height here
+     left ~275px of dead space inside each card once max-width kicked in,
+     which read as broken spacing between the cards. */
   display: block;
-  height: 680px;
   width: auto;
+  height: auto;
   max-width: 100%;
+  max-height: 680px;
 }
 
 .timelineWrap {
@@ -342,7 +346,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0;
@@ -450,4 +454,11 @@
   --cs-tag-border: rgba(197, 176, 156, 0.40);
   --cs-tag-ink: #EFE6DA;
   --cs-highlight: #5FD08A;
+}
+
+/* ── 14" laptops — 120px of vertical page padding is ~17% of a 720px
+   viewport. Trim it so the case study starts closer to the fold. */
+@media (max-height: 820px) {
+  .page { padding: 88px 64px; }
+  .mainColumn { gap: 48px; }
 }

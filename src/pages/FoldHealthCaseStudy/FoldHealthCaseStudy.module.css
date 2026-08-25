@@ -85,7 +85,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 18px;
-  line-height: normal;
+  line-height: 1.55;
   letter-spacing: 0;
   color: var(--color-ink-70);
   text-align: left;
@@ -175,7 +175,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: normal;
+  line-height: 1.65;
   color: var(--color-ink-70);
   width: 100%;
   margin: 0 0 16px 0;
@@ -230,4 +230,11 @@
   --cs-tag-bg: rgba(200, 163, 255, 0.16);
   --cs-tag-border: rgba(200, 163, 255, 0.38);
   --cs-tag-ink: #E9DDFF;
+}
+
+/* ── 14" laptops — 120px of vertical page padding is ~17% of a 720px
+   viewport. Trim it so the case study starts closer to the fold. */
+@media (max-height: 820px) {
+  .page { padding: 88px 64px; }
+  .mainColumn { gap: 48px; }
 }
